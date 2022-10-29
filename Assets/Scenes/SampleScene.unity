@@ -211,15 +211,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 226787042}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 475d978bcafab3d4b92b822c11cefbce, type: 3}
+  m_Script: {fileID: 11500000, guid: c8757ca7ca89c30489672c745493300d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   width: 512
   height: 512
-  depth: 65
-  scale: 20
-  offsetX: 100
-  offsetY: 100
+  scale: 50
+  octaves: 7
+  persistance: 0.5
+  lacunarity: 2
+  depth: 25
+  seed: 130
+  offset: {x: 0, y: 0}
 --- !u!1 &535066552
 GameObject:
   m_ObjectHideFlags: 0
