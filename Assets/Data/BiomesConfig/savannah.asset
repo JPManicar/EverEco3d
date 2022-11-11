@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 585f3dd794eb81c4f8fcda5a148752c7, type: 3}
+  m_Name: savannah
+  m_EditorClassIdentifier: 
+  BiomeName: savannah
+  texture: {fileID: 0}
+  minTemp: 0.06
+  maxTemp: 0.6
+  minHumidity: 0.1
+  maxHumidity: 0.5
+  minHeight: 0.01
+  maxHeight: 0.3
+  HeightModifier: {fileID: 2746028584944996926, guid: 67e9a4c1bc9582e4480f6b2dcc309ca3, type: 3}
+  TexturePainter: {fileID: 0}
