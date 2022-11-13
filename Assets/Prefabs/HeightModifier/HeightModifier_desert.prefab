@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mountainScale: 200
-  hilliness: 0.32
+  hilliness: 0.41
   sharpness: 1.2
   bias: 0.4
   Strength: 0.5

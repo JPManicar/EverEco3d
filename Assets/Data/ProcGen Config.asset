@@ -13,14 +13,32 @@ MonoBehaviour:
   m_Name: ProcGen Config
   m_EditorClassIdentifier: 
   Biomes:
-  - Biome: {fileID: 11400000, guid: f9a2b0ce6107c374f98ea853f5c0f9cf, type: 2}
-    Weighting: 0.2
-  - Biome: {fileID: 11400000, guid: bce312b26b35f4249b850df7bba74c73, type: 2}
-    Weighting: 0.15
-  - Biome: {fileID: 11400000, guid: 2532a2128c80c924f89f4c255199e31d, type: 2}
-    Weighting: 0.1
-  - Biome: {fileID: 11400000, guid: 1a25f1ecfd3c68049842443a0ca3f8ff, type: 2}
-    Weighting: 0.2
-  - Biome: {fileID: 11400000, guid: 39992bfb03c35924cbca6ceb4c73448a, type: 2}
-    Weighting: 0.2
-  BiomeSeedDensity: 0.32
+  - {fileID: 11400000, guid: 1a25f1ecfd3c68049842443a0ca3f8ff, type: 2}
+  - {fileID: 11400000, guid: f9a2b0ce6107c374f98ea853f5c0f9cf, type: 2}
+  - {fileID: 11400000, guid: 39992bfb03c35924cbca6ceb4c73448a, type: 2}
+  - {fileID: 11400000, guid: bce312b26b35f4249b850df7bba74c73, type: 2}
+  - {fileID: 11400000, guid: 2532a2128c80c924f89f4c255199e31d, type: 2}
+  - {fileID: 11400000, guid: dc5ebd5adc409ee448e149ed7ce39a5f, type: 2}
+  width: 512
+  height: 512
+  scale: 50
+  octaves: 8
+  persistance: 0.5
+  lacunarity: 2
+  depth: 45
+  seed: -1316435360
+  seaLevel: 0.2
+  offset: {x: 5046.8853, y: 1791.7272}
+  randomOffset: 1
+  a: 1.3
+  b: 5.5
+  useTrueEquator: 1
+  temperatureBias: 3
+  tempHeight: 0.1
+  tempLoss: 0.161
+  baseTemp: 1.3
+  spread: 16
+  spreadThreshold: 3
+  dewPoint: 30
+  precipitationIntensity: 0.7
+  humidityFlatteningThreshold: 0.45

@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 585f3dd794eb81c4f8fcda5a148752c7, type: 3}
   m_Name: temperate_forest
   m_EditorClassIdentifier: 
-  BiomeName: Forest
+  BiomeName: Temperate Forest
   texture: {fileID: 0}
-  minTemp: 0.4
-  maxTemp: 0.6
-  minHumidity: 0.5
-  maxHumidity: 0.7
+  minTemperature: 0.2
+  maxTemperature: 0.5
+  minPrecipitation: 0.3
+  maxPrecipitation: 0.85
   minHeight: 0.3
   maxHeight: 0.7
   HeightModifier: {fileID: 2746028584944996926, guid: 67e9a4c1bc9582e4480f6b2dcc309ca3, type: 3}
   TexturePainter: {fileID: 0}
+  color: {r: 0.21934366, g: 0.3773585, b: 0.21181916, a: 1}

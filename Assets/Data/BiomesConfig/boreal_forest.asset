@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 585f3dd794eb81c4f8fcda5a148752c7, type: 3}
-  m_Name: tundra
+  m_Name: boreal_forest
   m_EditorClassIdentifier: 
-  BiomeName: tundra
+  BiomeName: Boreal Forest
   texture: {fileID: 0}
-  minTemperature: 0
-  maxTemperature: 0.25
-  minPrecipitation: 0.01
-  maxPrecipitation: 0.25
-  minHeight: 0.2
-  maxHeight: 0.5
+  minTemperature: 0.25
+  maxTemperature: 0.4
+  minPrecipitation: 0.15
+  maxPrecipitation: 0.5
+  minHeight: 0
+  maxHeight: 0
   HeightModifier: {fileID: 0}
   TexturePainter: {fileID: 0}
-  color: {r: 0.92096835, g: 0.9680325, b: 0.9811321, a: 0.972549}
+  color: {r: 0.1761748, g: 0.3490566, b: 0.27840662, a: 0}

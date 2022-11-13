@@ -6,7 +6,8 @@ using System.Collections;
 // lacunarity controls the increase in the frequency of the octaves
 public static class NoiseGeneration {
 
-	public static float[,] GenerateNoiseMap(int mapWidth, int mapHeight, int seed, float scale, int octaves, float persistance, float lacunarity, Vector2 offset) {
+	public static float[,] GenerateNoiseMap(int mapWidth, int mapHeight, int seed, float scale, int octaves, float persistance, float lacunarity, Vector2 offset)
+	{
 		float[,] noiseMap = new float[mapWidth,mapHeight];
 		
 		System.Random prng = new System.Random (seed);
@@ -31,9 +32,9 @@ public static class NoiseGeneration {
 		for (int y = 0; y < mapHeight; y++) {
 			for (int x = 0; x < mapWidth; x++) {
 		
-				float amplitude = 1;
-				float frequency = 1;
-				float noiseHeight = 0;
+				float amplitude = 1f;
+				float frequency = 0.8f;
+				float noiseHeight = 0f;
 
 				for (int i = 0; i < octaves; i++) {
 

@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BiomeName: savannah
   texture: {fileID: 0}
-  minTemp: 0.06
-  maxTemp: 0.6
-  minHumidity: 0.1
-  maxHumidity: 0.5
-  minHeight: 0.01
-  maxHeight: 0.3
+  minTemperature: 0.7
+  maxTemperature: 1
+  minPrecipitation: 0.1
+  maxPrecipitation: 0.5
+  minHeight: 0.25
+  maxHeight: 0.4
   HeightModifier: {fileID: 2746028584944996926, guid: 67e9a4c1bc9582e4480f6b2dcc309ca3, type: 3}
   TexturePainter: {fileID: 0}
+  color: {r: 0.7202742, g: 0.79607844, b: 0.3647059, a: 1}

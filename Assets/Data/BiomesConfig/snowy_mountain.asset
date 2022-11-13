@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BiomeName: mountain
   texture: {fileID: 0}
-  minTemp: 0.01
-  maxTemp: 0.1
-  minHumidity: 0.1
-  maxHumidity: 0.2
+  minTemperature: 0
+  maxTemperature: 0.2
+  minPrecipitation: 0.1
+  maxPrecipitation: 0.25
   minHeight: 0.7
   maxHeight: 1
+  HeightModifier: {fileID: 0}
+  TexturePainter: {fileID: 0}
+  color: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}

@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BiomeName: desert
   texture: {fileID: 0}
-  minTemp: 0.4
-  maxTemp: 1
-  minHumidity: 0
-  maxHumidity: 0.05
+  minTemperature: 0.75
+  maxTemperature: 1
+  minPrecipitation: 0
+  maxPrecipitation: 0.2
   minHeight: 0.3
   maxHeight: 0.5
   HeightModifier: {fileID: 5457637085035203545, guid: 6b99a47f90253c242959ccc953855310, type: 3}
   TexturePainter: {fileID: 0}
+  color: {r: 0.9056604, g: 0.6957933, b: 0.38875046, a: 1}
