@@ -4,16 +4,19 @@ using UnityEngine;
 
 public static class HeightMap
 {
-    public static float[,] getHeightMap(float[,] heightMap, int width, int height, float seaLevel, float[,] fallOff)
+    public static float[,] getHeightMap(float[,] heightMap, int width, int height, float seaLevel, float[,] fallOff, bool useFalloffMap)
     {
-        
-        //subtracts the falloff from the original heightmap
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                float value = Mathf.Clamp01(heightMap[i, j] - fallOff[i, j]);
-                heightMap[i, j] = (value > seaLevel) ? value : seaLevel;
-            }
+        if(useFalloffMap)
+        {
+            //subtracts the falloff from the original heightmap
+            for (int i = 0; i < width; i++) {
+                for (int j = 0; j < height; j++) {
+                    float value = Mathf.Clamp01(heightMap[i, j] - fallOff[i, j]);
+                    heightMap[i, j] = (value > seaLevel) ? value : seaLevel;
+                }
+            }   
         }
+        
         //adjust height multipliers for better hilliness and mountain transitions
         for(int x = 0; x < width; x++)
         {

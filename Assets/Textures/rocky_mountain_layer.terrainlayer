@@ -8,11 +8,11 @@ TerrainLayer:
   m_PrefabAsset: {fileID: 0}
   m_Name: rocky_mountain_layer
   m_DiffuseTexture: {fileID: 2800000, guid: f85bd43fa27811b4784c8d2d96955516, type: 3}
-  m_NormalMapTexture: {fileID: 0}
+  m_NormalMapTexture: {fileID: 2800000, guid: 925ff35fdb73e724e940a3a86582e420, type: 3}
   m_MaskMapTexture: {fileID: 0}
   m_TileSize: {x: 2, y: 2}
-  m_TileOffset: {x: 0, y: 0}
-  m_Specular: {r: 0, g: 0, b: 0, a: 0}
+  m_TileOffset: {x: 0.2, y: 0.91}
+  m_Specular: {r: 0.5754717, g: 0.56189924, b: 0.56189924, a: 0}
   m_Metallic: 0
   m_Smoothness: 0
   m_NormalScale: 1
