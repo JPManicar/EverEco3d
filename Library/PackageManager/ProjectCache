@@ -13,14 +13,14 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638023025539234914
-    m_Hash: 1903383479
+      ticks: 638039290552564787
+    m_Hash: 738737907
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
   m_LocalFileStatus: []
 m_ProjectPath: C:/Users/ADMIN/Documents/Pao/Programming/Unity/EverEco-3D-Generator/Packages
-m_EditorVersion: 2021.3.10f1 (1c7d0df0160b)
+m_EditorVersion: 2021.3.12f1 (8af3c3e441b1)
 m_ResolvedPackages:
 - packageId: com.unity.collab-proxy@1.17.2
   testable: 0
@@ -36,7 +36,7 @@ m_ResolvedPackages:
     email: 
     url: 
   category: Editor
-  type: 
+  type: asset
   description: The Version Control package gives you the ability to use either Collaborate
     or Plastic SCM for Unity (beta) in the Unity editor. To use Plastic SCM for Unity
     (beta), a Plastic SCM subscription is required. Learn more about how you can
@@ -96,6 +96,7 @@ m_ResolvedPackages:
     - 1.17.1
     - 1.17.2
     - 1.17.6
+    - 1.17.7
     - 2.0.0-preview.6
     - 2.0.0-preview.8
     - 2.0.0-preview.15
@@ -109,6 +110,7 @@ m_ResolvedPackages:
     compatible:
     - 1.17.2
     - 1.17.6
+    - 1.17.7
     - 2.0.0-preview.6
     - 2.0.0-preview.8
     - 2.0.0-preview.15
@@ -119,13 +121,13 @@ m_ResolvedPackages:
     - 2.1.0-preview.3
     - 2.1.0-preview.5
     - 2.1.0-preview.6
-    verified: 1.17.6
+    verified: 1.17.7
   dependencies:
   - name: com.unity.services.core
     version: 1.0.1
   resolvedDependencies:
   - name: com.unity.services.core
-    version: 1.4.2
+    version: 1.4.3
   - name: com.unity.modules.unitywebrequest
     version: 1.0.0
   - name: com.unity.nuget.newtonsoft-json
@@ -153,7 +155,7 @@ m_ResolvedPackages:
     scopes: []
     isDefault: 1
     capabilities: 7
-  hideInEditor: 1
+  hideInEditor: 0
   isAssetStorePackage: 0
   datePublishedTicks: 637937432480000000
   documentationUrl: 
@@ -800,7 +802,7 @@ m_ResolvedPackages:
     email: 
     url: 
   category: 
-  type: 
+  type: asset
   description: Use Unity Timeline to create cinematic content, game-play sequences,
     audio sequences, and complex particle effects.
   status: 4
@@ -880,6 +882,7 @@ m_ResolvedPackages:
     - 1.7.0
     - 1.7.1
     - 1.7.2
+    - 1.8.0
     compatible:
     - 1.6.4
     - 1.7.0-pre.1
@@ -887,6 +890,7 @@ m_ResolvedPackages:
     - 1.7.0
     - 1.7.1
     - 1.7.2
+    - 1.8.0
     verified: 1.6.4
   dependencies:
   - name: com.unity.modules.director
@@ -919,7 +923,7 @@ m_ResolvedPackages:
     scopes: []
     isDefault: 1
     capabilities: 7
-  hideInEditor: 1
+  hideInEditor: 0
   isAssetStorePackage: 0
   datePublishedTicks: 637789039180000000
   documentationUrl: 
@@ -3371,12 +3375,12 @@ m_ResolvedPackages:
   unityLifecycle:
     version: 12.1.7
     nextVersion: 
-- packageId: com.unity.services.core@1.4.2
+- packageId: com.unity.services.core@1.4.3
   testable: 0
   isDirectDependency: 0
-  version: 1.4.2
+  version: 1.4.3
   source: 1
-  resolvedPath: C:\Users\ADMIN\Documents\Pao\Programming\Unity\EverEco-3D-Generator\Library\PackageCache\com.unity.services.core@1.4.2
+  resolvedPath: C:\Users\ADMIN\Documents\Pao\Programming\Unity\EverEco-3D-Generator\Library\PackageCache\com.unity.services.core@1.4.3
   assetPath: Packages/com.unity.services.core
   name: com.unity.services.core
   displayName: Services Core
@@ -3385,7 +3389,7 @@ m_ResolvedPackages:
     email: 
     url: 
   category: 
-  type: 
+  type: asset
   description: 'This package defines common components used by multiple Game Service
     packages.
 
@@ -3411,10 +3415,11 @@ m_ResolvedPackages:
     - 1.4.2
     - 1.4.3
     - 1.5.2
+    - 1.6.0
     compatible:
-    - 1.4.2
     - 1.4.3
     - 1.5.2
+    - 1.6.0
     verified: 1.4.3
   dependencies:
   - name: com.unity.modules.unitywebrequest
@@ -3438,18 +3443,18 @@ m_ResolvedPackages:
     scopes: []
     isDefault: 1
     capabilities: 7
-  hideInEditor: 1
+  hideInEditor: 0
   isAssetStorePackage: 0
-  datePublishedTicks: 637919618520000000
+  datePublishedTicks: 637959096350000000
   documentationUrl: 
   hasRepository: 1
   repository:
     type: git
     url: https://github.cds.internal.unity3d.com/unity/operate-services-sdk.git
-    revision: 3964d1641ebec474aa425853985bccbdb89c2a49
+    revision: 145c9bbe93bde4784d4641e172be4ca40a3745fc
     path: 
   unityLifecycle:
-    version: 1.4.2
+    version: 1.4.3
     nextVersion: 
 - packageId: com.unity.searcher@4.9.1
   testable: 0
