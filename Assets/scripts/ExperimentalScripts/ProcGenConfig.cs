@@ -30,7 +30,7 @@ public class ProcGenConfig : ScriptableObject
 	public int seed;
      public float seaLevel;
 	public Vector2 offset;
-    public bool randomOffset = true;
+   
 
     [Header("Falloff map variables")]
     public float a = 1.86f;
@@ -38,6 +38,8 @@ public class ProcGenConfig : ScriptableObject
 
     [Header("Booleans")]
     public bool useTrueEquator;
+    public bool useFalloffMap;
+    public bool randomOffset = true;
 
     // Variables related to temperature calculations
     [Header("Temperature map related variables")]

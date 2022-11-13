@@ -22,4 +22,4 @@ MonoBehaviour:
   maxHeight: 0
   HeightModifier: {fileID: 0}
   TexturePainter: {fileID: 0}
-  color: {r: 0.1761748, g: 0.3490566, b: 0.27840662, a: 0}
+  color: {r: 0.119170524, g: 0.24528301, b: 0.19369155, a: 0}

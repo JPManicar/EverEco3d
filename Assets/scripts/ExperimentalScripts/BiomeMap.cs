@@ -25,9 +25,13 @@ public static class BiomeMap
                         c = Color.white;
                     else {
                         foreach (BiomesConfig b in biomes) {
+
+                            
+
                             if (temperature > b.minTemperature && temperature <= b.maxTemperature 
                                 && precipitation > b.minPrecipitation && precipitation <= b.maxPrecipitation
                                 ) {
+                                    
                                 c = b.color;                                
                             }
                         }
@@ -41,3 +45,35 @@ public static class BiomeMap
         return biomeMap;
     }
 }
+
+
+    // Biome determine_biome ( float elevation , float temperature , float precipitation ) {
+    // if ( elevation < sealevel ) {
+    // // below sea level from deep to shallow
+    // if ( elevation < sealevel - 0.5f ) return Biome :: Abyssal ;
+    // if ( elevation < sealevel - 0.25f ) return Biome :: Ocean ;
+    // return Biome :: Coast ;
+
+    // } else if ( temperature < 0.0f ) {
+    // // below freezing point
+    // return Biome :: Ice ;
+
+    // } else if ( temperature < lower_threshold ) {
+    // // polar regions from dry to wet
+    // if ( precipitation < lower_threshold ) return Biome :: Mountain ;
+    // if ( precipitation < upper_threshold ) return Biome :: Tundra ;
+    // return Biome :: Taiga ;
+
+    // } else if ( temperature < upper_threshold ) {
+    // // temperate regions from dry to wet
+    // if ( precipitation < lower_threshold ) return Biome :: Steppe ;
+    // if ( precipitation < upper_threshold ) return Biome :: Prairie ;
+    // return Biome :: Forest ;
+
+    // } else {
+    // // tropical regions from dry to wet
+    // if ( precipitation < lower_threshold ) return Biome :: Desert ;
+    // if ( precipitation < upper_threshold ) return Biome :: Savanna ;
+    // return Biome :: Rainforest ;
+    // }
+    // }
