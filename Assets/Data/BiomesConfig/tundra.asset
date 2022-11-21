@@ -13,13 +13,16 @@ MonoBehaviour:
   m_Name: tundra
   m_EditorClassIdentifier: 
   BiomeName: tundra
-  texture: {fileID: 0}
   minTemperature: 0
-  maxTemperature: 0.2
-  minPrecipitation: 0.01
-  maxPrecipitation: 0.25
+  maxTemperature: 0.25
+  minPrecipitation: 0
+  maxPrecipitation: 0.2
   minHeight: 0.2
   maxHeight: 0.5
   HeightModifier: {fileID: 0}
   TexturePainter: {fileID: 0}
   color: {r: 0.92096835, g: 0.9680325, b: 0.9811321, a: 0.972549}
+  Textures:
+  - BiomeId: tundra
+    Diffuse: {fileID: 2800000, guid: 3da83d5333c38264981996ed3066a56f, type: 3}
+    NormalMap: {fileID: 0}

@@ -10,16 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 585f3dd794eb81c4f8fcda5a148752c7, type: 3}
-  m_Name: snowy_mountain
+  m_Name: shrubland
   m_EditorClassIdentifier: 
-  BiomeName: mountain
-  texture: {fileID: 0}
-  minTemperature: 0
-  maxTemperature: 0.2
-  minPrecipitation: 0.1
-  maxPrecipitation: 0.25
+  BiomeName: shrubland
+  minTemperature: 0.25
+  maxTemperature: 0.45
+  minPrecipitation: 0
+  maxPrecipitation: 0.1
   minHeight: 0.7
   maxHeight: 1
   HeightModifier: {fileID: 0}
   TexturePainter: {fileID: 0}
-  color: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
+  color: {r: 0.5943396, g: 0.5310048, b: 0.5018245, a: 1}
+  Textures:
+  - BiomeId: shrub
+    Diffuse: {fileID: 2800000, guid: 534237b9c0bf2434caa478ad21087100, type: 3}
+    NormalMap: {fileID: 2800000, guid: ac87f35179e144b4286a25d730837ca2, type: 3}

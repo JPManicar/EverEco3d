@@ -34,9 +34,9 @@ public static class HeightMap
     float mountainScale = 200f;
     float unscaledHeightMult = Mathf.PerlinNoise(x/mountainScale, z/mountainScale);
     
-    float hilliness = 0.55f; //in range [0, 1]; how much hilliness you see in the flat plains regions
+    float hilliness = 0.5f; //in range [0, 1]; how much hilliness you see in the flat plains regions
     float sharpness = 1.5f;
-    float bias = 0.6f; //any value but try in range [0, 1]; lower for more plains or higher for more mountains
+    float bias = 0.5f; //any value but try in range [0, 1]; lower for more plains or higher for more mountains
 
     
     float heightMult = hilliness + ((float)Mathf.Tan(sharpness*(unscaledHeightMult - bias)) + 1f)*(1f - hilliness)/2f;
