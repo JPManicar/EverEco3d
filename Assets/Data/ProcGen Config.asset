@@ -24,12 +24,12 @@ MonoBehaviour:
   height: 512
   scale: 75
   octaves: 7
-  persistance: 0.55
+  persistance: 0.32
   lacunarity: 2
   depth: 55
-  seed: -1738196070
+  seed: -1848906410
   seaLevel: 0.2
-  offset: {x: 9696.4375, y: 8542.176}
+  offset: {x: 1785.5087, y: 1294.779}
   a: 1.3
   b: 5.3
   useTrueEquator: 1
@@ -37,10 +37,10 @@ MonoBehaviour:
   randomOffset: 1
   temperatureBias: 3
   tempHeight: 0.11
-  tempLoss: 0.161
+  tempLoss: 0
   baseTemp: 1.3
   spread: 16
   spreadThreshold: 3
   dewPoint: 30
   precipitationIntensity: 0.8
-  humidityFlatteningThreshold: 0.45
+  humidityFlatteningThreshold: 0
