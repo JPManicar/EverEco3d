@@ -17,7 +17,7 @@ public class ProcGenConfig : ScriptableObject
     public List<BiomesConfig> Biomes;
     public int numofBiomes => Biomes.Count;
 
-     [Header("Base Height Map Generation")]
+    [Header("Base Height Map Generation")]
     public int width = 512;
 	public int height = 512;
 	public float scale;

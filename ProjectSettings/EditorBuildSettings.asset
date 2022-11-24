@@ -4,5 +4,20 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: dd914bf7b3e0fc344bc9e24d353d7fdd
+  - enabled: 1
+    path: Assets/Scenes/Create New Terrain.unity
+    guid: 533a1162f71594f4b97897229b85034b
+  - enabled: 1
+    path: Assets/Scenes/Edit Exisitng Terrain.unity
+    guid: e2c85b59c7ccbaf47930506ef4723a72
+  - enabled: 1
+    path: Assets/Scenes/Tool UI.unity
+    guid: a70d4a4e5a60cfd4bbbd333191848b0d
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}
