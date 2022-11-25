@@ -42,6 +42,8 @@ public static class PrecipitationMap
                 // Based on the previously generated humidity inversion map, we determine when we should invert the map. 
                 relHumidity = humidityInversionMap[i, j] == 1f ? 100 - (relHumidity * 2) : (relHumidity * 2); 
                 float precipitation = CalculatePrecipitation(relHumidity, tempMap[i, j], topIndex, bottomIndex, j, intensity, height, useTrueEquator);
+
+                
                 precMap[i, j] = precipitation;
             }
         }

@@ -1,23 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+   
+[System.Serializable]
+public class BiomeTextures
+{
+    public string TextureId;
+    public Texture2D Diffuse;
+    public Texture2D NormalMap;
+}
 
 [CreateAssetMenu(fileName = "Biome Config", menuName = "EverEco/Biome Configuration", order = -1)]
 public class BiomesConfig : ScriptableObject
 {
+ 
     public string BiomeName;
-
-//    //higher intensity = more biome spread
-//    [Range(0f, 1f)] public float minIntensity = 0.5f;
-//    [Range(0f, 1f)] public float maxIntensity = 1f;
-//    //decay controls how far the biome can go
-//    [Range(0f, 1f)] public float minDecayRate = 0.1f;
-//    [Range(0f, 1f)] public float maxDecayRate = 0.3f;
-
-
-    //Color or Texture
-    public Texture texture;
-
     //Temperature Settings
     public float minTemperature;
     public float maxTemperature;
@@ -30,7 +27,33 @@ public class BiomesConfig : ScriptableObject
     public float minHeight;
     public float maxHeight;
 
+    //Modifiers
     public GameObject HeightModifier;
     public GameObject TexturePainter;
     public Color color;
+    //Color or Texture
+    public List<BiomeTextures> Textures;
+
+
+
+    public List<TextureConfig> RetrieveTextures()
+    {
+        if (TexturePainter == null)
+            return null;
+
+        // extract all textures from every painter
+        List<TextureConfig> allTextures = new List<TextureConfig>();
+        BaseTexturePainter[] allPainters = TexturePainter.GetComponents<BaseTexturePainter>();
+        foreach(var painter in allPainters)
+        {
+            var painterTextures = painter.RetrieveTextures();
+
+            if (painterTextures == null || painterTextures.Count == 0)
+                continue;
+
+            allTextures.AddRange(painterTextures);
+        }
+
+        return allTextures;
+    }
 }

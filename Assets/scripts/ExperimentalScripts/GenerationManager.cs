@@ -14,7 +14,7 @@ public class GenerationManager : MonoBehaviour
     }
     [SerializeField]ProcGenConfig PCGConfig;
     [SerializeField] Terrain TargetTerrain;
-    
+    TexturePainting texturePainter;
 
     public DrawMode drawMode;
     public float[,] og_heightMap;
@@ -24,25 +24,34 @@ public class GenerationManager : MonoBehaviour
     public float[,] precipitationMap;
     public Color[,] biomeMap;
     public bool autoUpdate; 
+    public bool RegenerateLayers;
 
      [Header("Texture + Object that holds the map")]
     // Texture and object that holds the map
     public Renderer textureRenderer;
     public Texture2D temperatureColorImage;
 
-#if UNITY_EDITOR
-    private void Start()
-    {
-        PCGConfig.seed = Random.Range(int.MinValue, int.MaxValue);
-        //on start of the program a random x and y value will be chosen to randomize the terrain if random offset is toggled on
-        if(PCGConfig.randomOffset)
-        {
-        PCGConfig.offset.x = Random.Range(0f, 9999f);
-        PCGConfig.offset.y = Random.Range(0f, 9999f);
-        }
-        GenerateWorld();
-        TargetTerrain.terrainData = GenerateTerrain(TargetTerrain.terrainData);
-    }
+
+
+    // private void Start()
+    // {
+        
+    //     PCGConfig.seed = Random.Range(int.MinValue, int.MaxValue);
+    //     //on start of the program a random x and y value will be chosen to randomize the terrain if random offset is toggled on
+    //     if(PCGConfig.randomOffset)
+        // {
+        // PCGConfig.offset.x = Random.Range(0f, 9999f);
+        // PCGConfig.offset.y = Random.Range(0f, 9999f);
+        // }
+    //     GenerateWorld();  
+    // }
+
+    // private void Update()
+    // {
+    //     GenerateWorld();
+    //     TargetTerrain.terrainData = GenerateTerrain(TargetTerrain.terrainData);
+    // }
+
 
     public void DrawTexture(float[,] map) {
         int width = map.GetLength(0);
@@ -116,6 +125,9 @@ public class GenerationManager : MonoBehaviour
                                                             PCGConfig.precipitationIntensity, PCGConfig.useTrueEquator, PCGConfig.humidityFlatteningThreshold);
         biomeMap = BiomeMap.GenerateBiomeMap(heightMap, temperatureMap, precipitationMap, PCGConfig.seaLevel, PCGConfig.Biomes, PCGConfig.spread, PCGConfig.spreadThreshold);
 
+        //apply terrain heights
+        TargetTerrain.terrainData = GenerateTerrain(TargetTerrain.terrainData);
+
         //Draw Textures
         if (drawMode == DrawMode.OriginalHeightMap)
             DrawTexture(og_heightMap);
@@ -129,7 +141,18 @@ public class GenerationManager : MonoBehaviour
             DrawTexture(precipitationMap);
         if (drawMode == DrawMode.BiomeMap)
             DrawBiomeTexture(biomeMap);
+        
+
+        if(RegenerateLayers)
+            RegenerateTextures();
+        
+        //texturePainter.Perform_GenerateTextureMapping(PCGConfig);
             
+    }
+    public void RegenerateTextures()
+    {
+        texturePainter = gameObject.GetComponent<TexturePainting>();
+        texturePainter.Perform_LayerSetup(TargetTerrain);
     }
     TerrainData GenerateTerrain (TerrainData terrainData)
     {
@@ -140,96 +163,9 @@ public class GenerationManager : MonoBehaviour
         return terrainData;
     }
 
-       
-
-    // Might be useful for chunk generation
-    //Vector2Int[] NeighborOffset = new Vector2Int[]
-    // {
-    //     new Vector2Int(0,1),
-    //     new Vector2Int(0,-1),
-    //     new Vector2Int(1,0),
-    //     new Vector2Int(-1,0),
-    //     new Vector2Int(1,1),
-    //     new Vector2Int(-1,-1),
-    //     new Vector2Int(1,-1),
-    //     new Vector2Int(-1,1),
-    // };
-
-
-    //spawn a biome in the biome map
-    // void SpawnIndividualBiome(byte biomeIndex, int mapResolution)
-    // {
-
-        // //cache biome config
-        // BiomesConfig biomeConfig = PCGConfig.Biomes[biomeIndex].Biome;
-        
-        // //Get Spawn Location
-        // //will change this to the climate based biome conditions
-        // Vector2Int spawnLocation = new Vector2Int(Random.Range(0, mapResolution),Random.Range(0, mapResolution));
-
-        // float startIntensity = Random.Range(biomeConfig.minIntensity, biomeConfig.maxDecayRate);
-
-
-        // Queue<Vector2Int> workingQueue = new Queue<Vector2Int>();
-        // workingQueue.Enqueue(spawnLocation);
-
-
-        // //get visited map
-        // bool[,] visited = new bool[mapResolution, mapResolution];
-        // float[,] targetIntensity = new float[mapResolution, mapResolution];
-
-        // //set initial intensity
-        // targetIntensity[spawnLocation.x, spawnLocation.y] = startIntensity;
-
-        // //Start Ooze
-        // while(workingQueue.Count > 0)
-        // {  
-        //     Vector2Int workingLocation = workingQueue.Dequeue();
-        //     //set biome
-        //     BiomeMap[workingLocation.x, workingLocation.y] = biomeIndex;
-        //     visited[workingLocation.x, workingLocation.y] = true;
-        //     BiomeStrengths[workingLocation.x, workingLocation.y] = targetIntensity[workingLocation.x, workingLocation.y];
-
-
-        //     //neighbor traversal (traverses the map to look for valid points to spawn biome)
-        //     for(int neighborIndex = 0; neighborIndex < NeighborOffset.Length; ++neighborIndex)
-        //     {
-        //         Vector2Int neighborLocation = workingLocation * NeighborOffset[neighborIndex];
-
-        //         //skip invalid points
-        //         if(neighborLocation.x < 0 || neighborLocation.y < 0 || neighborLocation.x >= mapResolution || neighborLocation.y >= mapResolution)
-        //             continue;
-        //         if (visited[neighborLocation.x, neighborLocation.y])
-        //             continue;
-        //         //mark as visited
-        //         visited[neighborLocation.x,neighborLocation.y] = true;
-        //         //if valid then add to queue
-        //         workingQueue.Enqueue(neighborLocation);
-        //         //decay
-        //         float neighborStrength = targetIntensity[workingLocation.x, workingLocation.y] - Random.Range(biomeConfig.minDecayRate, biomeConfig.maxDecayRate);
-        //         if (neighborStrength < 0)
-        //         {
-        //             continue;
-        //         }
-        //     }
-                //Draw the biome map and save into a png 
-        //     Texture2D biomeMap = new Texture2D(mapResolution, mapResolution, TextureFormat.RGB24, false);
-        //     for(int y = 0; y < mapResolution; ++y)
-        //     {
-        //         for (int x = 0; x < mapResolution; ++x)
-        //         {
-        //             float hue = ((float)BiomeMap[x, y]/ (float)PCGConfig.numofBiomes);
-
-        //             biomeMap.SetPixel(x, y, Color.HSVToRGB(hue, 0.75f, 0.75f));
-        //         }        
-        //     }
-        //     biomeMap.Apply();
-        //     System.IO.File.WriteAllBytes("BiomeMap.png", biomeMap.EncodeToPNG());
-        // }
-
+    public ProcGenConfig getConfig()
+    {
+        return PCGConfig;
+    }
     
-    // }
-
-
-#endif
 }

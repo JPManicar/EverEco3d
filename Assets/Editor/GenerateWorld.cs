@@ -15,8 +15,12 @@ public class GenerateWorld : Editor
 			}
 		}
 
-        if (GUILayout.Button("Generate")) {
+        if (GUILayout.Button("Generate World")) {
             s.GenerateWorld();
+        }
+
+		if (GUILayout.Button("Generate Textures")) {
+            s.RegenerateTextures();
         }
 
 		

@@ -57,7 +57,10 @@ public class ProcGenConfig : ScriptableObject
     public float precipitationIntensity = 1f;
     [Range(0f, 1f)]
     public float humidityFlatteningThreshold;
-    
+    // Variables related to modifying the terrain's appearance
+    [Header("Terrain Modifiers")]
+    public GameObject PaintingPostProcessingModifier;
+
     private void OnValidate() {
         if (a < 0)
             a = 0;
