@@ -26,17 +26,10 @@ MonoBehaviour:
   octaves: 7
   persistance: 0.32
   lacunarity: 2
-<<<<<<< HEAD
   depth: 60
   seed: 235692414
   seaLevel: 0.2
   offset: {x: 1854.78, y: 4065.5713}
-=======
-  depth: 55
-  seed: -1848906410
-  seaLevel: 0.2
-  offset: {x: 1785.5087, y: 1294.779}
->>>>>>> main
   a: 1.3
   b: 5.3
   useTrueEquator: 1
@@ -44,19 +37,11 @@ MonoBehaviour:
   randomOffset: 0
   temperatureBias: 3
   tempHeight: 0.11
-<<<<<<< HEAD
   tempLoss: 0.166
-=======
-  tempLoss: 0
->>>>>>> main
   baseTemp: 1.3
   spread: 16
   spreadThreshold: 3
   dewPoint: 30
   precipitationIntensity: 0.8
-<<<<<<< HEAD
   humidityFlatteningThreshold: 0.44
   PaintingPostProcessingModifier: {fileID: 0}
-=======
-  humidityFlatteningThreshold: 0
->>>>>>> main
