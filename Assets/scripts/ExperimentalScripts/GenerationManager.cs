@@ -14,7 +14,7 @@ public class GenerationManager : MonoBehaviour
     }
     [SerializeField]ProcGenConfig PCGConfig;
     [SerializeField] Terrain TargetTerrain;
-    
+    TexturePainting texturePainter;
 
     public DrawMode drawMode;
     public float[,] og_heightMap;
@@ -24,6 +24,7 @@ public class GenerationManager : MonoBehaviour
     public float[,] precipitationMap;
     public Color[,] biomeMap;
     public bool autoUpdate; 
+    public bool RegenerateLayers;
 
      [Header("Texture + Object that holds the map")]
     // Texture and object that holds the map
@@ -31,15 +32,17 @@ public class GenerationManager : MonoBehaviour
     public Texture2D temperatureColorImage;
 
 
+
     // private void Start()
     // {
+        
     //     PCGConfig.seed = Random.Range(int.MinValue, int.MaxValue);
     //     //on start of the program a random x and y value will be chosen to randomize the terrain if random offset is toggled on
     //     if(PCGConfig.randomOffset)
-    //     {
-    //     PCGConfig.offset.x = Random.Range(0f, 9999f);
-    //     PCGConfig.offset.y = Random.Range(0f, 9999f);
-    //     }
+        // {
+        // PCGConfig.offset.x = Random.Range(0f, 9999f);
+        // PCGConfig.offset.y = Random.Range(0f, 9999f);
+        // }
     //     GenerateWorld();  
     // }
 
@@ -122,6 +125,9 @@ public class GenerationManager : MonoBehaviour
                                                             PCGConfig.precipitationIntensity, PCGConfig.useTrueEquator, PCGConfig.humidityFlatteningThreshold);
         biomeMap = BiomeMap.GenerateBiomeMap(heightMap, temperatureMap, precipitationMap, PCGConfig.seaLevel, PCGConfig.Biomes, PCGConfig.spread, PCGConfig.spreadThreshold);
 
+        //apply terrain heights
+        TargetTerrain.terrainData = GenerateTerrain(TargetTerrain.terrainData);
+
         //Draw Textures
         if (drawMode == DrawMode.OriginalHeightMap)
             DrawTexture(og_heightMap);
@@ -135,10 +141,18 @@ public class GenerationManager : MonoBehaviour
             DrawTexture(precipitationMap);
         if (drawMode == DrawMode.BiomeMap)
             DrawBiomeTexture(biomeMap);
+        
+
+        if(RegenerateLayers)
+            RegenerateTextures();
+        
+        //texturePainter.Perform_GenerateTextureMapping(PCGConfig);
             
-        //apply terrain heights
-        TargetTerrain.terrainData = GenerateTerrain(TargetTerrain.terrainData);
-            
+    }
+    public void RegenerateTextures()
+    {
+        texturePainter = gameObject.GetComponent<TexturePainting>();
+        texturePainter.Perform_LayerSetup(TargetTerrain);
     }
     TerrainData GenerateTerrain (TerrainData terrainData)
     {
@@ -149,5 +163,9 @@ public class GenerationManager : MonoBehaviour
         return terrainData;
     }
 
+    public ProcGenConfig getConfig()
+    {
+        return PCGConfig;
+    }
     
 }

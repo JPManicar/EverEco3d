@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class BiomeTextures
 {
-    public string BiomeId;
+    public string TextureId;
     public Texture2D Diffuse;
     public Texture2D NormalMap;
 }
@@ -27,6 +27,7 @@ public class BiomesConfig : ScriptableObject
     public float minHeight;
     public float maxHeight;
 
+    //Modifiers
     public GameObject HeightModifier;
     public GameObject TexturePainter;
     public Color color;

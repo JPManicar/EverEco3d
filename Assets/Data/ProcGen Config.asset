@@ -26,15 +26,15 @@ MonoBehaviour:
   octaves: 7
   persistance: 0.55
   lacunarity: 2
-  depth: 55
+  depth: 60
   seed: 235692414
   seaLevel: 0.2
-  offset: {x: 4756.175, y: 9181.011}
+  offset: {x: 1854.78, y: 4065.5713}
   a: 1.3
   b: 5.3
   useTrueEquator: 1
   useFalloffMap: 1
-  randomOffset: 1
+  randomOffset: 0
   temperatureBias: 3
   tempHeight: 0.11
   tempLoss: 0.166
