@@ -12,7 +12,6 @@ using UnityEngine.SceneManagement;
 
 public class TexturePainting : MonoBehaviour
 {
-
     Dictionary<TextureConfig, int> BiomeTextureToTerrainLayerIndex = new Dictionary<TextureConfig, int>();
     GenerationManager PCGManager;
 #if UNITY_EDITOR
@@ -54,18 +53,23 @@ public class TexturePainting : MonoBehaviour
         string scenePath = System.IO.Path.GetDirectoryName(SceneManager.GetActiveScene().path);
         PCGManager = gameObject.GetComponent<GenerationManager>();
 
+        Debug.Log("Scene Path = " + scenePath);
+
         Perform_GenerateTextureMapping(PCGManager.getConfig(), scenePath);
 
         // generate all of the layers
         int numLayers = BiomeTextureToTerrainLayerIndex.Count;
         List<TerrainLayer> newLayers = new List<TerrainLayer>(numLayers);
-        
+
         // preallocate the layers
         for (int layerIndex = 0; layerIndex < numLayers; ++layerIndex)
         {
             newLayers.Add(new TerrainLayer());
         }
-
+        //debugging  ignore
+        if(numLayers == 0)
+            Debug.Log("Empty Layers");
+        //end debug
         // iterate over the texture map
         foreach(var textureMappingEntry in BiomeTextureToTerrainLayerIndex)
         {
@@ -87,7 +91,6 @@ public class TexturePainting : MonoBehaviour
     }
 #endif
 
-
     void Perform_GenerateTextureMapping(ProcGenConfig Config, string scenePath)
     {
         BiomeTextureToTerrainLayerIndex.Clear();
@@ -96,20 +99,20 @@ public class TexturePainting : MonoBehaviour
         // build up list of all textures
         List<TextureConfig> allTextures = new List<TextureConfig>();
 
-
-        //biomeMetadata = BiomesConfig
         foreach(var biomeMetadata in Config.Biomes)
         {
+            //biome metadata is the BiomesConfig Scriptable Objects while Config.Biomes refer to the List
+            //so we get all the biomes in the biomes list of the config then call the retreive textures method
             List<TextureConfig> biomeTextures = biomeMetadata.RetrieveTextures();
 
-            //Debug.Log(biomeMetadata.Textures.TextureId);
+            Debug.Log("Adding " + biomeMetadata.BiomeName);
 
             if (biomeTextures == null || biomeTextures.Count == 0)
                 continue;
 
             allTextures.AddRange(biomeTextures);
-        }
 
+        }
         if (Config.PaintingPostProcessingModifier != null)
         {
             // extract all textures from every painter
@@ -137,7 +140,10 @@ public class TexturePainting : MonoBehaviour
         }
     }
 
-
+    public int GetLayerForTexture(TextureConfig textureConfig)
+    {
+        return BiomeTextureToTerrainLayerIndex[textureConfig];
+    }
 
 
 

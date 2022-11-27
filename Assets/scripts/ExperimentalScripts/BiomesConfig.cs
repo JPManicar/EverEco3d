@@ -3,13 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
    
 [System.Serializable]
-public class BiomeTextures
-{
-    public string TextureId;
-    public Texture2D Diffuse;
-    public Texture2D NormalMap;
-}
-
 [CreateAssetMenu(fileName = "Biome Config", menuName = "EverEco/Biome Configuration", order = -1)]
 public class BiomesConfig : ScriptableObject
 {
@@ -31,10 +24,6 @@ public class BiomesConfig : ScriptableObject
     public GameObject HeightModifier;
     public GameObject TexturePainter;
     public Color color;
-    //Color or Texture
-    public List<BiomeTextures> Textures;
-
-
 
     public List<TextureConfig> RetrieveTextures()
     {

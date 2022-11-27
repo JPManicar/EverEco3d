@@ -20,9 +20,5 @@ MonoBehaviour:
   minHeight: 0.3
   maxHeight: 0.5
   HeightModifier: {fileID: 5457637085035203545, guid: 6b99a47f90253c242959ccc953855310, type: 3}
-  TexturePainter: {fileID: 0}
+  TexturePainter: {fileID: 6277130523351149405, guid: a15d8559612b3574aaa46d9c535f0db0, type: 3}
   color: {r: 0.9056604, g: 0.6957933, b: 0.38875046, a: 1}
-  Textures:
-  - BiomeId: Desert
-    Diffuse: {fileID: 2800000, guid: cccc1795da5018344b24a0d882545b3b, type: 3}
-    NormalMap: {fileID: 2800000, guid: 7f9dbb35b6a417044bde86476b626336, type: 3}

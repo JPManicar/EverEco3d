@@ -23,6 +23,9 @@ MonoBehaviour:
   TexturePainter: {fileID: 0}
   color: {r: 0.119170524, g: 0.24528301, b: 0.19369155, a: 0}
   Textures:
-  - BiomeId: taiga
-    Diffuse: {fileID: 2800000, guid: e63c7e66aca47a244b9e4a24948d0a2a, type: 3}
+  - TextureId: boreal_grass
+    Diffuse: {fileID: 2800000, guid: 2b2284fd09c6b6e48a37160db4e369ac, type: 3}
+    NormalMap: {fileID: 2800000, guid: 7f9dbb35b6a417044bde86476b626336, type: 3}
+  - TextureId: boreal_grassyellow
+    Diffuse: {fileID: 2800000, guid: 534237b9c0bf2434caa478ad21087100, type: 3}
     NormalMap: {fileID: 0}

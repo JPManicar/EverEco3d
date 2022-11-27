@@ -44,4 +44,4 @@ MonoBehaviour:
   dewPoint: 30
   precipitationIntensity: 0.8
   humidityFlatteningThreshold: 0.4
-  PaintingPostProcessingModifier: {fileID: 0}
+  PaintingPostProcessingModifier: {fileID: 4273326731991161223, guid: b76c2136058018f43ba4f3c0cfcc8e38, type: 3}
