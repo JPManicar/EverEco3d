@@ -9,10 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7789797486039773703}
-  - component: {fileID: 6624199307978468716}
   - component: {fileID: 1597561313487168752}
   m_Layer: 0
-  m_Name: TexturePainter_Forest
+  m_Name: TexturePainter_Rainforest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,19 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6624199307978468716
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8225079789828142349}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1458c8e6e4006d745bb289990eddedc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Strength: 0.84
 --- !u!114 &1597561313487168752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41db1801a2547d14394cf56704fc3b33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Strength: 1
+  Strength: 0.91
   Texture:
     Diffuse: {fileID: 2800000, guid: e63c7e66aca47a244b9e4a24948d0a2a, type: 3}
     NormalMap: {fileID: 2800000, guid: 7f9dbb35b6a417044bde86476b626336, type: 3}

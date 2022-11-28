@@ -7,7 +7,7 @@ public class TexturePainter_Smooth : BaseTexturePainter
     [SerializeField] int SmoothingKernelSize = 5;
     
     public override void Execute(TexturePainting painter, int mapResolution, float[,] heightMap, Vector3 heightmapScale, float[,] slopeMap, 
-                        float[,,] alphaMaps, int alphaMapResolution, byte[,] biomeMap = null, int biomeIndex = -1, BiomesConfig biome = null)
+                        float[,,] alphaMaps, int alphaMapResolution, int[,] biomeMap = null, int biomeIndex = -1, BiomesConfig biome = null)
     {
         if (biomeMap != null)
         {

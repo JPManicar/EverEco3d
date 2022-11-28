@@ -22,7 +22,7 @@ public class GenerationManager : MonoBehaviour
     public float[,] heightMap;
     public float[,] temperatureMap;
     public float[,] precipitationMap;
-    public Color[,] biomeMap;
+    public int[,] biomeMap;
     public bool autoUpdate; 
     public bool RegenerateLayers;
 
@@ -86,7 +86,7 @@ public class GenerationManager : MonoBehaviour
         //textureRenderer.transform.localScale = new Vector3(width, 0, height);  //this line changes the plane's size to the size of the grid  maps
     }
 
-    public void DrawBiomeTexture(Color[,] map) {
+    public void DrawBiomeTexture(int[,] map) {
         int width = map.GetLength(0);
         int height = map.GetLength(1);
 
@@ -95,7 +95,16 @@ public class GenerationManager : MonoBehaviour
 
         for (int j = 0; j < height; j++) {
             for (int i = 0; i < width; i++) {
-                colorMap[j * width + i] = map[i, j];
+                foreach (var b in PCGConfig.Biomes)
+                {
+                    if(map[i,j] == 7)
+                        colorMap[j * width + i] = Color.blue;
+                    else if (b.BiomeId == map[i,j])
+                        colorMap[j * width + i] = b.color;
+                    else
+                        continue;
+                }
+                
             }
         }
 
@@ -109,6 +118,10 @@ public class GenerationManager : MonoBehaviour
 
     public void GenerateWorld()
     {
+        //cache map resolutions
+        int alphaMapResolution = TargetTerrain.terrainData.alphamapResolution;
+        int mapResolution = TargetTerrain.terrainData.heightmapResolution;
+
         og_heightMap = NoiseGeneration.GenerateNoiseMap(PCGConfig.width,PCGConfig.height, PCGConfig.seed, PCGConfig.scale,
                                                         PCGConfig.octaves, PCGConfig.persistance, PCGConfig.lacunarity, PCGConfig.offset);
         fallOffMap = falloffMap.GenerateFalloffMap(PCGConfig.width, PCGConfig.height, PCGConfig.a, PCGConfig.b);
@@ -142,18 +155,24 @@ public class GenerationManager : MonoBehaviour
         if (drawMode == DrawMode.BiomeMap)
             DrawBiomeTexture(biomeMap);
         
-
+    #if UNITY_EDITOR
         if(RegenerateLayers)
             RegenerateTextures();
-        
+    #endif     
         //texturePainter.Perform_GenerateTextureMapping(PCGConfig);
+        Perform_TerrainPainting(mapResolution, alphaMapResolution);
             
-    }
+    }//END GenerateWorld()
+
+
+    #if UNITY_EDITOR
     public void RegenerateTextures()
     {
         texturePainter = gameObject.GetComponent<TexturePainting>();
         texturePainter.Perform_LayerSetup(TargetTerrain);
     }
+    #endif 
+
     TerrainData GenerateTerrain (TerrainData terrainData)
     {
         terrainData.heightmapResolution = PCGConfig.width + 1;
@@ -168,5 +187,60 @@ public class GenerationManager : MonoBehaviour
         return PCGConfig;
     }
     
-    
+    void Perform_TerrainPainting(int mapResolution, int alphaMapResolution)
+    {
+        float[,] heightMap = TargetTerrain.terrainData.GetHeights(0, 0, mapResolution, mapResolution);
+        float[,,] alphaMaps = TargetTerrain.terrainData.GetAlphamaps(0, 0, alphaMapResolution, alphaMapResolution);
+        texturePainter = gameObject.GetComponent<TexturePainting>();
+        // zero out all layers
+        for (int y = 0; y < alphaMapResolution; ++y)
+        {
+            for (int x = 0; x < alphaMapResolution; ++x)
+            {
+                for (int layerIndex = 0; layerIndex < TargetTerrain.terrainData.alphamapLayers; ++layerIndex)
+                {
+                    alphaMaps[x, y, layerIndex] = 0;
+                }
+            }
+        }   
+        // generate the slope map
+        float[,] SlopeMap = new float[alphaMapResolution, alphaMapResolution];
+        for (int y = 0; y < alphaMapResolution; ++y)
+        {
+            for (int x = 0; x < alphaMapResolution; ++x)
+            {
+                SlopeMap[x, y] = TargetTerrain.terrainData.GetInterpolatedNormal((float) x / alphaMapResolution, (float) y / alphaMapResolution).y;
+            }
+        } 
+
+        // run terrain painting for each biome
+        for (int biomeIndex = 0; biomeIndex < PCGConfig.Biomes.Count; ++biomeIndex)
+        {
+            var biome = PCGConfig.Biomes[biomeIndex];
+            if (biome.TexturePainter == null)
+                continue;
+
+            BaseTexturePainter[] modifiers = biome.TexturePainter.GetComponents<BaseTexturePainter>();
+
+            foreach(var modifier in modifiers)
+            {
+                modifier.Execute(texturePainter, mapResolution, heightMap, TargetTerrain.terrainData.heightmapScale, SlopeMap, 
+                alphaMaps, alphaMapResolution, biomeMap, biomeIndex, biome);
+            }
+        }        
+
+        // run texture post processing
+        if (PCGConfig.PaintingPostProcessingModifier != null)
+        {
+            BaseTexturePainter[] modifiers = PCGConfig.PaintingPostProcessingModifier.GetComponents<BaseTexturePainter>();
+
+            foreach(var modifier in modifiers)
+            {
+                modifier.Execute(texturePainter, mapResolution, heightMap, TargetTerrain.terrainData.heightmapScale, SlopeMap, 
+                alphaMaps, alphaMapResolution);
+            }    
+        }
+
+        TargetTerrain.terrainData.SetAlphamaps(0, 0, alphaMaps);
+    }
 }

@@ -20,5 +20,5 @@ MonoBehaviour:
   minHeight: 0.25
   maxHeight: 0.4
   HeightModifier: {fileID: 0}
-  TexturePainter: {fileID: 0}
+  TexturePainter: {fileID: 8578629896570336219, guid: 21211dd616b969141bfd1f22f20a5e54, type: 3}
   color: {r: 0.59420764, g: 0.6226415, b: 0.22027412, a: 1}

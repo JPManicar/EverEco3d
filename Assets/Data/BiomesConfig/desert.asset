@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 585f3dd794eb81c4f8fcda5a148752c7, type: 3}
   m_Name: desert
   m_EditorClassIdentifier: 
+  BiomeId: 1
   BiomeName: desert
   minTemperature: 0.75
   maxTemperature: 1

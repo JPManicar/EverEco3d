@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Biome Config", menuName = "EverEco/Biome Configuration", order = -1)]
 public class BiomesConfig : ScriptableObject
 {
- 
+    public int BiomeId;
     public string BiomeName;
     //Temperature Settings
     public float minTemperature;

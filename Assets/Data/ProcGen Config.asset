@@ -13,34 +13,34 @@ MonoBehaviour:
   m_Name: ProcGen Config
   m_EditorClassIdentifier: 
   Biomes:
-  - {fileID: 11400000, guid: 1a25f1ecfd3c68049842443a0ca3f8ff, type: 2}
-  - {fileID: 11400000, guid: 39992bfb03c35924cbca6ceb4c73448a, type: 2}
-  - {fileID: 11400000, guid: dc5ebd5adc409ee448e149ed7ce39a5f, type: 2}
-  - {fileID: 11400000, guid: f9a2b0ce6107c374f98ea853f5c0f9cf, type: 2}
   - {fileID: 11400000, guid: bce312b26b35f4249b850df7bba74c73, type: 2}
   - {fileID: 11400000, guid: 2532a2128c80c924f89f4c255199e31d, type: 2}
   - {fileID: 11400000, guid: b45122ce7470ca04fb74b6d9e4270908, type: 2}
+  - {fileID: 11400000, guid: f9a2b0ce6107c374f98ea853f5c0f9cf, type: 2}
+  - {fileID: 11400000, guid: dc5ebd5adc409ee448e149ed7ce39a5f, type: 2}
+  - {fileID: 11400000, guid: 39992bfb03c35924cbca6ceb4c73448a, type: 2}
+  - {fileID: 11400000, guid: 1a25f1ecfd3c68049842443a0ca3f8ff, type: 2}
   width: 512
   height: 512
   scale: 50
   octaves: 7
   persistance: 0.55
   lacunarity: 2
-  depth: 60
-  seed: 235738195
+  depth: 55
+  seed: 235510632
   seaLevel: 0.2
-  offset: {x: 1854.78, y: 4065.5713}
+  offset: {x: 1857.64, y: 4324}
   a: 1.3
   b: 5.3
   useTrueEquator: 1
   useFalloffMap: 1
-  randomOffset: 0
-  temperatureBias: 3
+  randomOffset: 1
+  temperatureBias: 3.3
   tempHeight: 0.11
   tempLoss: 0.161
   baseTemp: 1.3
   spread: 16
-  spreadThreshold: 3.21
+  spreadThreshold: 3
   dewPoint: 30
   precipitationIntensity: 0.8
   humidityFlatteningThreshold: 0.4

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 585f3dd794eb81c4f8fcda5a148752c7, type: 3}
   m_Name: boreal_forest
   m_EditorClassIdentifier: 
+  BiomeId: 4
   BiomeName: Boreal Forest
   minTemperature: 0.1
   maxTemperature: 0.6
@@ -20,12 +21,5 @@ MonoBehaviour:
   minHeight: 0
   maxHeight: 0
   HeightModifier: {fileID: 0}
-  TexturePainter: {fileID: 0}
+  TexturePainter: {fileID: 839517512628046714, guid: 76010c9ea80f6414fae94e287d865693, type: 3}
   color: {r: 0.119170524, g: 0.24528301, b: 0.19369155, a: 0}
-  Textures:
-  - TextureId: boreal_grass
-    Diffuse: {fileID: 2800000, guid: 2b2284fd09c6b6e48a37160db4e369ac, type: 3}
-    NormalMap: {fileID: 2800000, guid: 7f9dbb35b6a417044bde86476b626336, type: 3}
-  - TextureId: boreal_grassyellow
-    Diffuse: {fileID: 2800000, guid: 534237b9c0bf2434caa478ad21087100, type: 3}
-    NormalMap: {fileID: 0}

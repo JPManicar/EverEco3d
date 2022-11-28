@@ -12,17 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 585f3dd794eb81c4f8fcda5a148752c7, type: 3}
   m_Name: shrubland
   m_EditorClassIdentifier: 
+  BiomeId: 5
   BiomeName: shrubland
   minTemperature: 0.25
   maxTemperature: 0.45
-  minPrecipitation: 0
+  minPrecipitation: 0.03
   maxPrecipitation: 0.1
   minHeight: 0.7
   maxHeight: 1
   HeightModifier: {fileID: 0}
-  TexturePainter: {fileID: 0}
+  TexturePainter: {fileID: 5130388920553885133, guid: 24a8f4655fb7ff341bbea2ee64cf8900, type: 3}
   color: {r: 0.5943396, g: 0.5310048, b: 0.5018245, a: 1}
-  Textures:
-  - TextureId: shrub_grass
-    Diffuse: {fileID: 2800000, guid: b301791044771ec45af74e2696a03c42, type: 3}
-    NormalMap: {fileID: 0}

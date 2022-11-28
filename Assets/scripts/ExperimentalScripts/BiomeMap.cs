@@ -4,10 +4,12 @@ using UnityEngine;
 
 public static class BiomeMap
 {
-    public static Color[,] GenerateBiomeMap(float[,] heightMap, float[,] tempMap, float[,] precMap, float seaLevel, List<BiomesConfig> biomes, float spread, float spreadThreshold) {
+    public static int[,] GenerateBiomeMap(float[,] heightMap, float[,] tempMap, float[,] precMap, float seaLevel, List<BiomesConfig> biomes, float spread, float spreadThreshold) 
+    {
         int width = tempMap.GetLength(0);
         int height = tempMap.GetLength(1);
-        Color[,] biomeMap = new Color[width, height];
+       // Color[,] biomeMap = new Color[width, height];
+        int[,] biomeMap = new int[width, height];
 
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
@@ -16,23 +18,25 @@ public static class BiomeMap
                 float temperature = tempMap[i, j];
                 float precipitation = precMap[i, j] / 100f;
 
-                Color c = Color.black;
-
+                //Color c = Color.black;
+                int c = -1;
                 if (elevation <= seaLevel) {
-                    c = Color.blue;
+                   c = 7; // c = Color.blue;
                 } else {
                     if (precipitation + (temperature * spread) < spreadThreshold)  // Allows for finer control over how widespread the tundra and polar ice caps are
-                        c = Color.white;
+                        {
+                            //c = Color.white;
+                            c = 6;
+                        }   
                     else {
                         foreach (BiomesConfig b in biomes) {
-
-                            
 
                             if (temperature > b.minTemperature && temperature <= b.maxTemperature 
                                 && precipitation > b.minPrecipitation && precipitation <= b.maxPrecipitation
                                 ) {
                                     
-                                c = b.color;                                
+                                //c = b.color;  
+                                c = b.BiomeId;                              
                             }
                         }
                     }
@@ -44,10 +48,10 @@ public static class BiomeMap
 
         return biomeMap;
     }
-}
 
 
-    // Biome determine_biome ( float elevation , float temperature , float precipitation ) {
+
+    // public static string[,] determine_biome( float elevation , float temperature , float precipitation ) {
     // if ( elevation < sealevel ) {
     // // below sea level from deep to shallow
     // if ( elevation < sealevel - 0.5f ) return Biome :: Abyssal ;
@@ -77,3 +81,7 @@ public static class BiomeMap
     // return Biome :: Rainforest ;
     // }
     // }
+}
+
+
+    
