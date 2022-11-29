@@ -24,7 +24,7 @@ MonoBehaviour:
   height: 512
   scale: 50
   octaves: 7
-  persistance: 0.55
+  persistance: 0.5536727
   lacunarity: 2
   depth: 55
   seed: 235510632

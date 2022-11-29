@@ -7,8 +7,8 @@ using TMPro;
 public class UserConfig : MonoBehaviour
 {
     public ProcGenConfig PCGConfig;
-    [SerializeField] public TMP_InputField height_inptfield = null;
-    [SerializeField] public TMP_InputField width_inptfield = null;
+    [SerializeField] public TMP_Dropdown height_dropdown;
+    [SerializeField] public TMP_Dropdown width_dropdown;
     [SerializeField] public TMP_InputField scale_inptfield = null;
     [SerializeField] public TMP_InputField octaves_inptfield = null;
     [SerializeField] public TMP_InputField lacunarity_inptfield = null;
@@ -33,19 +33,55 @@ public class UserConfig : MonoBehaviour
 
 
     //Height Map Settings
-    public void setHeight(int height)
+    public void setHeight(int val)
     {
 
-        int heightValue = int.Parse(height_inptfield.text);
-        PCGConfig.height = heightValue;
+        if(val == 0)
+        {
+
+            PCGConfig.height = 512;
+
+        }
+
+        if(val == 1)
+        {
+
+            PCGConfig.height = 256;
+
+        }
+        
+        if(val == 2)
+        {
+
+            PCGConfig.height = 1024;
+
+        }
 
     }
 
-       public void setWidth(int width)
+    public void setWidth(int val)
     {
 
-        int widthValue = int.Parse(width_inptfield.text);
-        PCGConfig.width = widthValue;
+        if(val == 0)
+        {
+
+            PCGConfig.width = 512;
+
+        }
+
+        if(val == 1)
+        {
+
+            PCGConfig.width = 256;
+
+        }
+        
+        if(val == 2)
+        {
+
+            PCGConfig.width = 1024;
+
+        }
 
     }
 
