@@ -12,11 +12,10 @@ using UnityEngine.SceneManagement;
 
 public class TexturePainting : MonoBehaviour
 {
-    Dictionary<TextureConfig, int> BiomeTextureToTerrainLayerIndex = new Dictionary<TextureConfig, int>();
     GenerationManager PCGManager;
 #if UNITY_EDITOR
     
-    public void Perform_LayerSetup(Terrain TargetTerrain)
+    public void Perform_LayerSetup(Terrain TargetTerrain, Dictionary<TextureConfig, int> BiomeTextureToTerrainLayerIndex )
     {
         Debug.Log("Deleting Existing Layers");
         // delete any existing layers
@@ -55,7 +54,7 @@ public class TexturePainting : MonoBehaviour
 
         Debug.Log("Scene Path = " + scenePath);
 
-        Perform_GenerateTextureMapping(PCGManager.getConfig(), scenePath);
+        PCGManager.Perform_GenerateTextureMapping();
 
         // generate all of the layers
         int numLayers = BiomeTextureToTerrainLayerIndex.Count;
@@ -91,59 +90,10 @@ public class TexturePainting : MonoBehaviour
     }
 #endif
 
-    void Perform_GenerateTextureMapping(ProcGenConfig Config, string scenePath)
-    {
-        BiomeTextureToTerrainLayerIndex.Clear();
-        
-        Debug.Log("Building up a list of all textures");
-        // build up list of all textures
-        List<TextureConfig> allTextures = new List<TextureConfig>();
+     
 
-        foreach(var biomeMetadata in Config.Biomes)
-        {
-            //biome metadata is the BiomesConfig Scriptable Objects while Config.Biomes refer to the List
-            //so we get all the biomes in the biomes list of the config then call the retreive textures method
-            List<TextureConfig> biomeTextures = biomeMetadata.RetrieveTextures();
 
-            Debug.Log("Adding " + biomeMetadata.BiomeName);
-
-            if (biomeTextures == null || biomeTextures.Count == 0)
-                continue;
-
-            allTextures.AddRange(biomeTextures);
-
-        }
-        if (Config.PaintingPostProcessingModifier != null)
-        {
-            // extract all textures from every painter
-            BaseTexturePainter[] allPainters = Config.PaintingPostProcessingModifier.GetComponents<BaseTexturePainter>();
-            foreach(var painter in allPainters)
-            {
-                var painterTextures = painter.RetrieveTextures();
-
-                if (painterTextures == null || painterTextures.Count == 0)
-                    continue;
-
-                allTextures.AddRange(painterTextures);
-            }            
-        }
-
-        //filter out any duplicate entries
-       allTextures = allTextures.Distinct().ToList();
-
-        //iterate over the texture configs
-        int layerIndex = 0;
-        foreach(var textureConfig in allTextures)
-        {
-            BiomeTextureToTerrainLayerIndex[textureConfig] = layerIndex;
-            ++layerIndex;
-        }
-    }
-
-    public int GetLayerForTexture(TextureConfig textureConfig)
-    {
-        return BiomeTextureToTerrainLayerIndex[textureConfig];
-    }
+    
 
 
 

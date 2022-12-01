@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
+
 
 public class UserConfig : MonoBehaviour
 {
@@ -246,5 +248,8 @@ public class UserConfig : MonoBehaviour
         PCGConfig.humidityFlatteningThreshold = hft_slider.value;
 
     }
-
+    public void backToMainMenu()
+    {
+        SceneManager.LoadSceneAsync(0);
+    }
 }

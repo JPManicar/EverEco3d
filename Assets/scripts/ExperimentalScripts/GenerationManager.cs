@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class GenerationManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class GenerationManager : MonoBehaviour
     [SerializeField]ProcGenConfig PCGConfig;
     [SerializeField] Terrain TargetTerrain;
     TexturePainting texturePainter;
+    Dictionary<TextureConfig, int> BiomeTextureToTerrainLayerIndex = new Dictionary<TextureConfig, int>();
 
     public DrawMode drawMode;
     public float[,] og_heightMap;
@@ -30,28 +32,6 @@ public class GenerationManager : MonoBehaviour
     // Texture and object that holds the map
     public Renderer textureRenderer;
     public Texture2D temperatureColorImage;
-
-
-
-    // private void Start()
-    // {
-        
-    //     PCGConfig.seed = Random.Range(int.MinValue, int.MaxValue);
-    //     //on start of the program a random x and y value will be chosen to randomize the terrain if random offset is toggled on
-    //     if(PCGConfig.randomOffset)
-        // {
-        // PCGConfig.offset.x = Random.Range(0f, 9999f);
-        // PCGConfig.offset.y = Random.Range(0f, 9999f);
-        // }
-    //     GenerateWorld();  
-    // }
-
-    // private void Update()
-    // {
-    //     GenerateWorld();
-    //     TargetTerrain.terrainData = GenerateTerrain(TargetTerrain.terrainData);
-    // }
-
 
     public void DrawTexture(float[,] map) {
         int width = map.GetLength(0);
@@ -118,6 +98,13 @@ public class GenerationManager : MonoBehaviour
 
     public void GenerateWorld()
     {
+        //PCGConfig.seed = Random.Range(int.MinValue, int.MaxValue);
+        // if(PCGConfig.randomOffset)
+        // {
+        //     PCGConfig.offset.x = Random.Range(0f, 9999f);
+        //     PCGConfig.offset.y = Random.Range(0f, 9999f);
+        //  }
+   
         //cache map resolutions
         int alphaMapResolution = TargetTerrain.terrainData.alphamapResolution;
         int mapResolution = TargetTerrain.terrainData.heightmapResolution;
@@ -159,7 +146,8 @@ public class GenerationManager : MonoBehaviour
         if(RegenerateLayers)
             RegenerateTextures();
     #endif     
-        //texturePainter.Perform_GenerateTextureMapping(PCGConfig);
+       
+        Perform_GenerateTextureMapping();
         Perform_TerrainPainting(mapResolution, alphaMapResolution);
             
     }//END GenerateWorld()
@@ -169,7 +157,7 @@ public class GenerationManager : MonoBehaviour
     public void RegenerateTextures()
     {
         texturePainter = gameObject.GetComponent<TexturePainting>();
-        texturePainter.Perform_LayerSetup(TargetTerrain);
+        texturePainter.Perform_LayerSetup(TargetTerrain, BiomeTextureToTerrainLayerIndex);
     }
     #endif 
 
@@ -186,7 +174,60 @@ public class GenerationManager : MonoBehaviour
     {
         return PCGConfig;
     }
+
+    public void Perform_GenerateTextureMapping()
+    {
+        BiomeTextureToTerrainLayerIndex.Clear();
+        
+        Debug.Log("Building up a list of all textures");
+        // build up list of all textures
+        List<TextureConfig> allTextures = new List<TextureConfig>();
+
+        foreach(var biomeMetadata in PCGConfig.Biomes)
+        {
+            //biome metadata is the BiomesConfig Scriptable Objects while Config.Biomes refer to the List
+            //so we get all the biomes in the biomes list of the config then call the retreive textures method
+            List<TextureConfig> biomeTextures = biomeMetadata.RetrieveTextures();
+
+            Debug.Log("Adding " + biomeMetadata.BiomeName);
+
+            if (biomeTextures == null || biomeTextures.Count == 0)
+                continue;
+
+            allTextures.AddRange(biomeTextures);
+
+        }
+        if (PCGConfig.PaintingPostProcessingModifier != null)
+        {
+            // extract all textures from every painter
+            BaseTexturePainter[] allPainters = PCGConfig.PaintingPostProcessingModifier.GetComponents<BaseTexturePainter>();
+            foreach(var painter in allPainters)
+            {
+                var painterTextures = painter.RetrieveTextures();
+
+                if (painterTextures == null || painterTextures.Count == 0)
+                    continue;
+
+                allTextures.AddRange(painterTextures);
+            }            
+        }
+
+        //filter out any duplicate entries
+       allTextures = allTextures.Distinct().ToList();
+
+        //iterate over the texture configs
+        int layerIndex = 0;
+        foreach(var textureConfig in allTextures)
+        {
+            BiomeTextureToTerrainLayerIndex[textureConfig] = layerIndex;
+            ++layerIndex;
+        }
+    }
     
+   public int GetLayerForTexture(TextureConfig textureConfig)
+    {
+        return BiomeTextureToTerrainLayerIndex[textureConfig];
+    }
     void Perform_TerrainPainting(int mapResolution, int alphaMapResolution)
     {
         float[,] heightMap = TargetTerrain.terrainData.GetHeights(0, 0, mapResolution, mapResolution);
@@ -224,7 +265,7 @@ public class GenerationManager : MonoBehaviour
 
             foreach(var modifier in modifiers)
             {
-                modifier.Execute(texturePainter, mapResolution, heightMap, TargetTerrain.terrainData.heightmapScale, SlopeMap, 
+                modifier.Execute(this, mapResolution, heightMap, TargetTerrain.terrainData.heightmapScale, SlopeMap, 
                 alphaMaps, alphaMapResolution, biomeMap, biomeIndex, biome);
             }
         }        
@@ -236,7 +277,7 @@ public class GenerationManager : MonoBehaviour
 
             foreach(var modifier in modifiers)
             {
-                modifier.Execute(texturePainter, mapResolution, heightMap, TargetTerrain.terrainData.heightmapScale, SlopeMap, 
+                modifier.Execute(this, mapResolution, heightMap, TargetTerrain.terrainData.heightmapScale, SlopeMap, 
                 alphaMaps, alphaMapResolution);
             }    
         }

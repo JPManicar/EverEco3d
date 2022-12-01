@@ -28,4 +28,9 @@ public class menuLoader : MonoBehaviour
         }
 
     }
+     public void ExitGame()
+    {
+        Debug.Log("Quitting Generator");
+        Application.Quit();
+    }
 }

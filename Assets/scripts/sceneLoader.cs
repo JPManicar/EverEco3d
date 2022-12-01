@@ -16,7 +16,7 @@ public class sceneLoader : MonoBehaviour
         StartCoroutine(LoadAsynchronously(sceneIndex));
     }
 
-    IEnumerator LoadAsynchronously(int sceneIndex)
+    public IEnumerator LoadAsynchronously(int sceneIndex)
     {
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
@@ -34,5 +34,7 @@ public class sceneLoader : MonoBehaviour
         }
 
     }
+
+   
 
 }

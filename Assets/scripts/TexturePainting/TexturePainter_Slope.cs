@@ -7,10 +7,10 @@ public class TexturePainter_Slope : BaseTexturePainter
     [SerializeField] TextureConfig Texture;
     [SerializeField] AnimationCurve IntensityVsSlope;
 
-    public override void Execute(TexturePainting painter, int mapResolution, float[,] heightMap, Vector3 heightmapScale, float[,] slopeMap,
+    public override void Execute(GenerationManager manager, int mapResolution, float[,] heightMap, Vector3 heightmapScale, float[,] slopeMap,
      float[,,] alphaMaps, int alphaMapResolution, int[,] biomeMap = null, int biomeIndex = -1, BiomesConfig biome = null)
     {
-        int textureLayer = painter.GetLayerForTexture(Texture);
+        int textureLayer = manager.GetLayerForTexture(Texture);
 
         for (int y = 0; y < alphaMapResolution; ++y)
         {

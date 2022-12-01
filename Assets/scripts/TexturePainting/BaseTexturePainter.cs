@@ -36,7 +36,7 @@ public class BaseTexturePainter : MonoBehaviour
 {   
     [SerializeField] [Range(0f, 1f)] protected float Strength = 1f;
     
-    public virtual void Execute(TexturePainting painter, int mapResolution, float[,] heightMap, Vector3 heightmapScale, float[,] slopeMap, 
+    public virtual void Execute(GenerationManager manager, int mapResolution, float[,] heightMap, Vector3 heightmapScale, float[,] slopeMap, 
                                 float[,,] alphaMaps, int alphaMapResolution, int[,] biomeMap = null, int biomeIndex = -1, BiomesConfig biome = null)
     {
         Debug.LogError("No implementation of Execute function for " + gameObject.name);

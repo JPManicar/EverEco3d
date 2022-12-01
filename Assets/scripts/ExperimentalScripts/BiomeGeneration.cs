@@ -79,10 +79,6 @@ public struct BiomeType
     public bool isWaterLayer;
 }
 
-
-   
-
-
     // Biome determine_biome ( float elevation , float temperature , float precipitation ) {
     // if ( elevation < sealevel ) {
     // // below sea level from deep to shallow

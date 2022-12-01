@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5413517521482174372}
-  - component: {fileID: 1594240905475427743}
+  - component: {fileID: 6643866301858735265}
   m_Layer: 0
   m_Name: TexturePainter_BorealForest
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1594240905475427743
+--- !u!114 &6643866301858735265
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,17 +41,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 839517512628046714}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56c52d09bee8c694abba641aed0177c7, type: 3}
+  m_Script: {fileID: 11500000, guid: 41db1801a2547d14394cf56704fc3b33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Strength: 0.93
-  BaseTexture:
+  Strength: 0.98
+  Texture:
     Diffuse: {fileID: 2800000, guid: 2b2284fd09c6b6e48a37160db4e369ac, type: 3}
-    NormalMap: {fileID: 0}
-  PaintingConfigs:
-  - TextureToPaint:
-      Diffuse: {fileID: 2800000, guid: 3da83d5333c38264981996ed3066a56f, type: 3}
-      NormalMap: {fileID: 0}
-    IntensityModifier: 0.03
-    NoiseScale: 20
-    NoiseThreshold: 0.03
+    NormalMap: {fileID: 2800000, guid: 7f9dbb35b6a417044bde86476b626336, type: 3}
+  IntensityVsSlope:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0041656494
+      value: 0.9380285
+      inSlope: -0.042262677
+      outSlope: -0.042262677
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.22351708
+    - serializedVersion: 3
+      time: 0.9958191
+      value: 0.009433746
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

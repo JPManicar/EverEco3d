@@ -17,10 +17,10 @@ public class TexturePainter_Random : BaseTexturePainter
     [SerializeField] TextureConfig BaseTexture;
     [SerializeField] List<RandomPainterConfig> PaintingConfigs;
 
-    public override void Execute(TexturePainting painter, int mapResolution, float[,] heightMap, Vector3 heightmapScale, float[,] slopeMap, 
+    public override void Execute(GenerationManager manager, int mapResolution, float[,] heightMap, Vector3 heightmapScale, float[,] slopeMap, 
                             float[,,] alphaMaps, int alphaMapResolution, int[,] biomeMap = null, int biomeIndex = -1, BiomesConfig biome = null)
     {
-        int baseTextureLayer = painter.GetLayerForTexture(BaseTexture);
+        int baseTextureLayer = manager.GetLayerForTexture(BaseTexture);
 
         for (int y = 0; y < alphaMapResolution; ++y)
         {
@@ -41,7 +41,7 @@ public class TexturePainter_Random : BaseTexturePainter
                     float noiseValue = Mathf.PerlinNoise(x * config.NoiseScale, y * config.NoiseScale);
                     if (Random.Range(0f, 1f) >= noiseValue)
                     {
-                        int layer = painter.GetLayerForTexture(config.TextureToPaint);
+                        int layer = manager.GetLayerForTexture(config.TextureToPaint);
                         alphaMaps[x, y, layer] = Strength * config.IntensityModifier;
                     }
                 }
