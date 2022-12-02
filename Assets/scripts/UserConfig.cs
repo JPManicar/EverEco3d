@@ -33,47 +33,6 @@ public class UserConfig : MonoBehaviour
     [SerializeField] public Slider hft_slider = null;
 
 
-<<<<<<< HEAD
-    void Awake()
-    {
-
-        seed_text.text = PCGConfig.seed.ToString();
-
-    }
-
-    //Project description
-
-    public void setSeed()
-    {
-        if(seed_text.text == "Enter Text...")
-        {
-            Debug.Log("No seed changes");
-        }
-        else{
-        int seedValue = int.Parse(seed_inptfield.text);
-        PCGConfig.seed = seedValue;
-        seed_text.text = PCGConfig.seed.ToString();
-        }    
-        
-            
-    }
-
-    public void setProjName()
-    {
-
-        projName_text.text = projName_inputfield.text.ToString();
-
-    }   
-
-    public void saveChanges()
-    {
-
-        setSeed();
-        setProjName();
-
-    }
-=======
->>>>>>> parent of b1f2d51 (Added functionality to project description panel)
 
     //Height Map Settings
     public void setHeight(int val)
