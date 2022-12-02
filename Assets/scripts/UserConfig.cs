@@ -21,6 +21,10 @@ public class UserConfig : MonoBehaviour
     [SerializeField] public Toggle usetrueequator_toggle;
     [SerializeField] public Toggle usefalloffmap_toggle;
     [SerializeField] public Toggle randomoffset_toggle;
+     [SerializeField] public TMP_Text seed_text;
+    [SerializeField] public TMP_Text projName_text;
+    [SerializeField] public TMP_InputField seed_inptfield = null;
+    [SerializeField] public TMP_InputField projName_inputfield = null;
     [SerializeField] public TMP_InputField tempbias_inptfield = null;
     [SerializeField] public TMP_InputField tempheight_inptfield = null;
     [SerializeField] public TMP_InputField basetemp_inptfield = null;
@@ -33,7 +37,38 @@ public class UserConfig : MonoBehaviour
     [SerializeField] public Slider hft_slider = null;
 
 
+ void Awake()
+    {
 
+        seed_text.text = PCGConfig.seed.ToString();
+
+    }
+
+    //Project description
+
+    public void setSeed()
+    {
+
+        int seedValue = int.Parse(seed_inptfield.text);
+        PCGConfig.seed = seedValue;
+        seed_text.text = PCGConfig.seed.ToString();
+            
+    }
+
+    public void setProjName()
+    {
+
+        projName_text.text = projName_inputfield.text.ToString();
+
+    }   
+
+    public void saveChanges()
+    {
+
+        setSeed();
+        setProjName();
+
+    }
     //Height Map Settings
     public void setHeight(int val)
     {
