@@ -32,6 +32,7 @@ public class GenerationManager : MonoBehaviour
     // Texture and object that holds the map
     public Renderer textureRenderer;
     public Texture2D temperatureColorImage;
+    public ResourceGenerator assetPlacer;
 
     public void DrawTexture(float[,] map) {
         int width = map.GetLength(0);
@@ -119,8 +120,10 @@ public class GenerationManager : MonoBehaviour
         int latestIndex = HeightMap.getLatestIndex(heightMap,PCGConfig.width, PCGConfig.height, PCGConfig.seaLevel);
 
         //Climate Maps
+        
         temperatureMap = TempMap.GenerateTemperatureMap(heightMap, PCGConfig.temperatureBias, earliestIndex, latestIndex,
                                                 PCGConfig.tempHeight, PCGConfig.tempLoss,PCGConfig.baseTemp, PCGConfig.useTrueEquator);
+        
         precipitationMap = PrecipitationMap.GeneratePrecipitationMap(og_heightMap, temperatureMap, PCGConfig.dewPoint, earliestIndex, latestIndex, 
                                                             PCGConfig.precipitationIntensity, PCGConfig.useTrueEquator, PCGConfig.humidityFlatteningThreshold);
         biomeMap = BiomeMap.GenerateBiomeMap(heightMap, temperatureMap, precipitationMap, PCGConfig.seaLevel, PCGConfig.Biomes, PCGConfig.spread, PCGConfig.spreadThreshold);
@@ -146,11 +149,18 @@ public class GenerationManager : MonoBehaviour
         if(RegenerateLayers)
             RegenerateTextures();
     #endif     
-       
+        
+        //Retrieve Textures for each Biome
         Perform_GenerateTextureMapping();
-        Perform_TerrainPainting(mapResolution, alphaMapResolution);
-            
+        
+        //Paint the Terrain
+        Perform_TerrainPainting();
+       
+        //Spawn Objects
+        assetPlacer.regenenerateObjects();
+
     }//END GenerateWorld()
+
 
 
     #if UNITY_EDITOR
@@ -174,7 +184,7 @@ public class GenerationManager : MonoBehaviour
     {
         return PCGConfig;
     }
-
+    
     public void Perform_GenerateTextureMapping()
     {
         BiomeTextureToTerrainLayerIndex.Clear();
@@ -228,8 +238,11 @@ public class GenerationManager : MonoBehaviour
     {
         return BiomeTextureToTerrainLayerIndex[textureConfig];
     }
-    void Perform_TerrainPainting(int mapResolution, int alphaMapResolution)
+    public void Perform_TerrainPainting()
     {
+        int alphaMapResolution = TargetTerrain.terrainData.alphamapResolution;
+        int mapResolution = TargetTerrain.terrainData.heightmapResolution;
+
         float[,] heightMap = TargetTerrain.terrainData.GetHeights(0, 0, mapResolution, mapResolution);
         float[,,] alphaMaps = TargetTerrain.terrainData.GetAlphamaps(0, 0, alphaMapResolution, alphaMapResolution);
         texturePainter = gameObject.GetComponent<TexturePainting>();
