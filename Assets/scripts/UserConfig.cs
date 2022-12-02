@@ -9,8 +9,12 @@ using TMPro;
 public class UserConfig : MonoBehaviour
 {
     public ProcGenConfig PCGConfig;
+    [SerializeField] public TMP_Text seed_text;
+    [SerializeField] public TMP_Text projName_text;
     [SerializeField] public TMP_Dropdown height_dropdown;
     [SerializeField] public TMP_Dropdown width_dropdown;
+    [SerializeField] public TMP_InputField seed_inptfield = null;
+    [SerializeField] public TMP_InputField projName_inputfield = null;
     [SerializeField] public TMP_InputField scale_inptfield = null;
     [SerializeField] public TMP_InputField octaves_inptfield = null;
     [SerializeField] public TMP_InputField lacunarity_inptfield = null;
@@ -33,6 +37,38 @@ public class UserConfig : MonoBehaviour
     [SerializeField] public Slider hft_slider = null;
 
 
+    void Awake()
+    {
+
+        seed_text.text = PCGConfig.seed.ToString();
+
+    }
+
+    //Project description
+
+    public void setSeed()
+    {
+
+        int seedValue = int.Parse(seed_inptfield.text);
+        PCGConfig.seed = seedValue;
+        seed_text.text = PCGConfig.seed.ToString();
+            
+    }
+
+    public void setProjName()
+    {
+
+        projName_text.text = projName_inputfield.text.ToString();
+
+    }   
+
+    public void saveChanges()
+    {
+
+        setSeed();
+        setProjName();
+
+    }
 
     //Height Map Settings
     public void setHeight(int val)
@@ -248,6 +284,7 @@ public class UserConfig : MonoBehaviour
         PCGConfig.humidityFlatteningThreshold = hft_slider.value;
 
     }
+
     public void backToMainMenu()
     {
         SceneManager.LoadSceneAsync(0);
