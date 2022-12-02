@@ -48,10 +48,16 @@ public class UserConfig : MonoBehaviour
 
     public void setSeed()
     {
-
+        if(seed_text.text == "Enter Text...")
+        {
+            Debug.Log("No seed changes");
+        }
+        else{
         int seedValue = int.Parse(seed_inptfield.text);
         PCGConfig.seed = seedValue;
         seed_text.text = PCGConfig.seed.ToString();
+        }    
+        
             
     }
 
