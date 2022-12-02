@@ -2926,11 +2926,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PCGConfig: {fileID: 11400000, guid: 305862c2c1c757b45926ebc12dead19a, type: 2}
   seed_text: {fileID: 1741483445}
+<<<<<<< HEAD
   projName_text: {fileID: 1385272557}
   height_dropdown: {fileID: 2117994794}
   width_dropdown: {fileID: 215351192}
   seed_inptfield: {fileID: 384278892}
   projName_inputfield: {fileID: 1385272556}
+=======
+  projName_text: {fileID: 2096772741}
+  height_dropdown: {fileID: 2117994794}
+  width_dropdown: {fileID: 215351192}
+  seed_inptfield: {fileID: 384278892}
+  projName_inputfield: {fileID: 2096772740}
+>>>>>>> 72c3d03dbc9940258898af3854a1046cbf582529
   scale_inptfield: {fileID: 2129638629}
   octaves_inptfield: {fileID: 2129638628}
   lacunarity_inptfield: {fileID: 2129638627}
@@ -3209,6 +3217,7 @@ MonoBehaviour:
   RegenerateLayers: 0
   textureRenderer: {fileID: 1536364336}
   temperatureColorImage: {fileID: 2800000, guid: 5e8f65e2e77be6a42a8492fa46014090, type: 3}
+  assetPlacer: {fileID: 0}
 --- !u!4 &1704478131
 Transform:
   m_ObjectHideFlags: 0
@@ -3449,6 +3458,28 @@ MonoBehaviour:
   header: Sea level
   content: 'A number between 0 to 1 that controls the sea level in the noise map.
     [Default: 0.2]'
+--- !u!114 &2096772740 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2802273086198973928, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 2129638606}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2096772741 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2400690302670111200, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 2129638606}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2117994794 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2132259045296368969, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
@@ -4671,6 +4702,34 @@ PrefabInstance:
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 6062338011019319933, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6062338011019319933, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6062338011019319933, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1624117058}
+    - target: {fileID: 6062338011019319933, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6062338011019319933, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: setSeed
+      objectReference: {fileID: 0}
+    - target: {fileID: 6062338011019319933, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UserConfig, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6062338011019319933, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6076220035634309885, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
       propertyPath: m_Name
       value: b_inptfield
@@ -5269,7 +5328,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8776698429939470447, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8776698429939470447, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

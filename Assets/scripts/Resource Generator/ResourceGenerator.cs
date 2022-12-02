@@ -19,13 +19,12 @@ public class ResourceGenerator : MonoBehaviour
     public LayerMask layerMask;
     public Vector2 positivePosition, negativePosition;
 
-    private void Start()
-    {
+    // private void Start()
+    // {
+    //     SpawnResources();
+    // }
 
-        SpawnResources();
-    }
-
-    private void Update()
+    public void regenenerateObjects()
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
