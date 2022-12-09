@@ -9,29 +9,29 @@ using TMPro;
 public class UserConfig : MonoBehaviour
 {
     public ProcGenConfig PCGConfig;
-    public GenerationManager genManager;
     [SerializeField] public TMP_Dropdown height_dropdown;
     [SerializeField] public TMP_Dropdown width_dropdown;
-    [SerializeField] public Slider scale_slider = null;
-    [SerializeField] public Slider octaves_slider= null;
-    [SerializeField] public Slider lacunarity_slider = null;
-    [SerializeField] public Slider depth_slider = null;
-    [SerializeField] public Slider a_slider = null;
-    [SerializeField] public Slider b_slider = null;
+    [SerializeField] public TMP_InputField scale_inptfield = null;
+    [SerializeField] public TMP_InputField octaves_inptfield = null;
+    [SerializeField] public TMP_InputField lacunarity_inptfield = null;
+    [SerializeField] public TMP_InputField sealevel_inptfield = null;
+    [SerializeField] public TMP_InputField depth_inptfield = null;
+    [SerializeField] public TMP_InputField a_inptfield = null;
+    [SerializeField] public TMP_InputField b_inptfield = null;
     [SerializeField] public Toggle usetrueequator_toggle;
     [SerializeField] public Toggle usefalloffmap_toggle;
     [SerializeField] public Toggle randomoffset_toggle;
-    [SerializeField] public TMP_Text seed_text;
+     [SerializeField] public TMP_Text seed_text;
     [SerializeField] public TMP_Text projName_text;
     [SerializeField] public TMP_InputField seed_inptfield = null;
     [SerializeField] public TMP_InputField projName_inputfield = null;
-    [SerializeField] public Slider tempbias_slider = null;
-    [SerializeField] public Slider tempheight_slider = null;
-    [SerializeField] public Slider basetemp_slider = null;
-    [SerializeField] public Slider spread_slider = null;
-    [SerializeField] public Slider spreadthreshold_slider = null;
-    [SerializeField] public Slider dewpoint_slider = null;
-    [SerializeField] public Slider precintensity_slider = null;
+    [SerializeField] public TMP_InputField tempbias_inptfield = null;
+    [SerializeField] public TMP_InputField tempheight_inptfield = null;
+    [SerializeField] public TMP_InputField basetemp_inptfield = null;
+    [SerializeField] public TMP_InputField spread_inptfield = null;
+    [SerializeField] public TMP_InputField spreadthreshold_inptfield = null;
+    [SerializeField] public TMP_InputField dewpoint_inptfield = null;
+    [SerializeField] public TMP_InputField precintensity_inptfield = null;
     [SerializeField] public Slider persistence_slider = null;
     [SerializeField] public Slider temp_loss_slider = null;
     [SerializeField] public Slider hft_slider = null;
@@ -125,14 +125,16 @@ public class UserConfig : MonoBehaviour
        public void setScale(float scale)
     {
 
-        PCGConfig.scale = scale_slider.value;
+        float scaleValue = float.Parse(scale_inptfield.text);
+        PCGConfig.scale = scaleValue;
 
     }
 
      public void setOctaves(int octaves)
     {
 
-        PCGConfig.octaves = (int)octaves_slider.value;
+        int octavesValue = int.Parse(octaves_inptfield.text);
+        PCGConfig.octaves = octavesValue;
 
     }
 
@@ -146,14 +148,24 @@ public class UserConfig : MonoBehaviour
     public void setLacunarity(float lacunarity)
     {
 
-        PCGConfig.lacunarity= lacunarity_slider.value;
+        float lacunarityValue = float.Parse(lacunarity_inptfield.text);
+        PCGConfig.lacunarity = lacunarityValue;
+
+    }
+
+    public void setSeaLevel(float seaLevel)
+    {
+
+        float seaLevelValue = float.Parse(sealevel_inptfield.text);
+        PCGConfig.seaLevel = seaLevelValue;
 
     }
 
     public void setDepth(int depth)
     {
 
-        PCGConfig.depth = (int)depth_slider.value;
+        int depthValue = int.Parse(depth_inptfield.text);
+        PCGConfig.depth = depthValue;
 
     }
 
@@ -162,14 +174,16 @@ public class UserConfig : MonoBehaviour
     public void setA(float a)
     {
 
-        PCGConfig.a= a_slider.value;
+        float aValue = float.Parse(a_inptfield.text);
+        PCGConfig.a = aValue;
 
     }
 
     public void setB(float b)
     {
 
-        PCGConfig.b= b_slider.value;
+        float bValue = float.Parse(b_inptfield.text);
+        PCGConfig.b = bValue;
 
     }
 
@@ -201,14 +215,16 @@ public class UserConfig : MonoBehaviour
      public void setTempBias(float temperatureBias)
     {
 
-        PCGConfig.temperatureBias= tempbias_slider.value;
+        float tempBiasValue = float.Parse(tempbias_inptfield.text);
+        PCGConfig.temperatureBias = tempBiasValue;
 
     }
 
     public void setTempHeight(float tempHeight)
     {
 
-        PCGConfig.tempHeight= tempheight_slider.value;
+        float tempHeightValue = float.Parse(tempheight_inptfield.text);
+        PCGConfig.tempHeight = tempHeightValue;
 
     }
 
@@ -222,21 +238,24 @@ public class UserConfig : MonoBehaviour
      public void setBaseTemp(float baseTemp)
     {
 
-        PCGConfig.baseTemp= basetemp_slider.value;
+        float baseTempValue = float.Parse(basetemp_inptfield.text);
+        PCGConfig.baseTemp = baseTempValue;
 
     }
 
     public void setSpread(float spread)
     {
 
-        PCGConfig.spread= spread_slider.value;
+        float spreadValue = float.Parse(spread_inptfield.text);
+        PCGConfig.spread = spreadValue;
 
     }
 
     public void setSpreadThreshold(float spreadThreshold)
     {
 
-        PCGConfig.spreadThreshold= spreadthreshold_slider.value;
+        float spreadThresholdValue = float.Parse(spreadthreshold_inptfield.text);
+        PCGConfig.spreadThreshold = spreadThresholdValue;
 
     }
 
@@ -245,14 +264,16 @@ public class UserConfig : MonoBehaviour
     public void setDewPoint(float dewPoint)
     {
 
-        PCGConfig.dewPoint= dewpoint_slider.value;
+        float dewPointValue = float.Parse(dewpoint_inptfield.text);
+        PCGConfig.dewPoint = dewPointValue;
 
     }
 
     public void setPrecIntensity(float precipitationIntensity)
     {
 
-        PCGConfig.precipitationIntensity= precintensity_slider.value;
+        float precIntensityValue = float.Parse(precintensity_inptfield.text);
+        PCGConfig.precipitationIntensity = precIntensityValue;
 
     }
 
@@ -262,68 +283,8 @@ public class UserConfig : MonoBehaviour
         PCGConfig.humidityFlatteningThreshold = hft_slider.value;
 
     }
-
     public void backToMainMenu()
     {
         SceneManager.LoadSceneAsync(0);
-    }
-
-    public void resetToDefault()
-    {
-
-        PCGConfig.scale = 50;
-        scale_slider.value = 50;
-
-        PCGConfig.octaves = 7;
-        octaves_slider.value = 7;
-
-        PCGConfig.lacunarity = 2;
-        lacunarity_slider.value = 2;
-
-        PCGConfig.persistance = 0.6f;
-        persistence_slider.value = 0.6f;
-
-        PCGConfig.depth = 55;
-        depth_slider.value = 55;
-
-        PCGConfig.a = 1.3f;
-        a_slider.value = 1.3f;
-
-        PCGConfig.b = 5.3f;
-        b_slider.value = 5.3f;
-
-        PCGConfig.temperatureBias = 3.3f;
-        tempbias_slider.value = 3.3f;
-
-        PCGConfig.tempHeight = 0.11f;
-        tempheight_slider.value = 0.11f;
-
-        PCGConfig.baseTemp = 0.5f;
-        basetemp_slider.value = 0.5f;
-
-        PCGConfig.tempLoss = 0.161f;
-        temp_loss_slider.value = 0.161f;
-
-        PCGConfig.spread = 16;
-        spread_slider.value = 16;
-
-        PCGConfig.spreadThreshold = 3;
-        spreadthreshold_slider.value = 3;
-
-        PCGConfig.dewPoint = 30;
-        dewpoint_slider.value = 30;
-
-        PCGConfig.precipitationIntensity = 0.8f;
-        precintensity_slider.value = 0.8f;
-
-        PCGConfig.humidityFlatteningThreshold = 0.4f;
-        hft_slider.value = 0.4f;
-    }
-
-    public void applyChanges()
-    {
-
-        genManager.GenerateWorld();
-
     }
 }

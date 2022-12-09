@@ -28,7 +28,7 @@ public class SliderValueText : MonoBehaviour
    void UpdateText(float val)
    {
 
-    sliderText.text = slider.value.ToString("0.00");
+    sliderText.text = slider.value.ToString();
 
    }
 }
