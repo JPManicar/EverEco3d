@@ -26,11 +26,8 @@ public class ResourceGenerator : MonoBehaviour
 
     public void regenenerateObjects()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
             DeleteResources();
             SpawnResources();
-        }
     }
 
 

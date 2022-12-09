@@ -28,10 +28,11 @@ public class GenerationManager : MonoBehaviour
     public bool autoUpdate; 
     public bool RegenerateLayers;
 
-     [Header("Texture + Object that holds the map")]
+     [Header("Texture + Objects")]
     // Texture and object that holds the map
     public Renderer textureRenderer;
     public Texture2D temperatureColorImage;
+    public GameObject waterPlane;
     public ResourceGenerator assetPlacer;
 
     public void DrawTexture(float[,] map) {
@@ -121,6 +122,7 @@ public class GenerationManager : MonoBehaviour
 
         //Climate Maps
         
+      
         temperatureMap = TempMap.GenerateTemperatureMap(heightMap, PCGConfig.temperatureBias, earliestIndex, latestIndex,
                                                 PCGConfig.tempHeight, PCGConfig.tempLoss,PCGConfig.baseTemp, PCGConfig.useTrueEquator);
         
@@ -128,6 +130,12 @@ public class GenerationManager : MonoBehaviour
                                                             PCGConfig.precipitationIntensity, PCGConfig.useTrueEquator, PCGConfig.humidityFlatteningThreshold);
         biomeMap = BiomeMap.GenerateBiomeMap(heightMap, temperatureMap, precipitationMap, PCGConfig.seaLevel, PCGConfig.Biomes, PCGConfig.spread, PCGConfig.spreadThreshold);
 
+        //adjust sea level depending on depth
+            float y = PCGConfig.depth * PCGConfig.seaLevel;
+            Vector3 currentPosition = waterPlane.transform.position;
+            Vector3 waterLevel = new Vector3(currentPosition.x, y, currentPosition.z);
+            waterPlane.transform.position = waterLevel;
+       
         //apply terrain heights
         TargetTerrain.terrainData = GenerateTerrain(TargetTerrain.terrainData);
 
