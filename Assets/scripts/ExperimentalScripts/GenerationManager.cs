@@ -33,6 +33,7 @@ public class GenerationManager : MonoBehaviour
     public Renderer textureRenderer;
     public Texture2D temperatureColorImage;
     public ResourceGenerator assetPlacer;
+    public GameObject waterPlane;
 
     public void DrawTexture(float[,] map) {
         int width = map.GetLength(0);
@@ -149,7 +150,9 @@ public class GenerationManager : MonoBehaviour
         if(RegenerateLayers)
             RegenerateTextures();
     #endif     
-        
+        //adjust sea level depending on terrain depth
+        SetWaterPlaneHeight();
+
         //Retrieve Textures for each Biome
         Perform_GenerateTextureMapping();
         
@@ -183,6 +186,15 @@ public class GenerationManager : MonoBehaviour
     public ProcGenConfig getConfig()
     {
         return PCGConfig;
+    }
+
+    void SetWaterPlaneHeight()
+    {
+            //adjust sea level depending on depth
+            float planeY = PCGConfig.depth * PCGConfig.seaLevel;
+            Vector3 currentPosition = waterPlane.transform.position;
+            Vector3 waterLevel = new Vector3(currentPosition.x, planeY, currentPosition.z);
+            waterPlane.transform.position = waterLevel;
     }
     
     public void Perform_GenerateTextureMapping()

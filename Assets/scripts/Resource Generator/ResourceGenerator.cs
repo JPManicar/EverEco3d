@@ -26,11 +26,8 @@ public class ResourceGenerator : MonoBehaviour
 
     public void regenenerateObjects()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
             DeleteResources();
             SpawnResources();
-        }
     }
 
 
@@ -66,7 +63,7 @@ public class ResourceGenerator : MonoBehaviour
     {
         foreach (Transform child in transform)
         {
-            Destroy(child.gameObject);
+            DestroyImmediate(child.gameObject);
         }
     }
 
