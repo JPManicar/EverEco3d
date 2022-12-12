@@ -130,11 +130,7 @@ public class GenerationManager : MonoBehaviour
                                                             PCGConfig.precipitationIntensity, PCGConfig.useTrueEquator, PCGConfig.humidityFlatteningThreshold);
         biomeMap = BiomeMap.GenerateBiomeMap(heightMap, temperatureMap, precipitationMap, PCGConfig.seaLevel, PCGConfig.Biomes, PCGConfig.spread, PCGConfig.spreadThreshold);
 
-        //adjust sea level depending on depth
-            float y = PCGConfig.depth * PCGConfig.seaLevel;
-            Vector3 currentPosition = waterPlane.transform.position;
-            Vector3 waterLevel = new Vector3(currentPosition.x, y, currentPosition.z);
-            waterPlane.transform.position = waterLevel;
+       
        
         //apply terrain heights
         TargetTerrain.terrainData = GenerateTerrain(TargetTerrain.terrainData);
@@ -157,7 +153,9 @@ public class GenerationManager : MonoBehaviour
         if(RegenerateLayers)
             RegenerateTextures();
     #endif     
-        
+        //adjust sea level depending on terrain depth
+        SetWaterPlaneHeight();
+
         //Retrieve Textures for each Biome
         Perform_GenerateTextureMapping();
         
@@ -191,6 +189,15 @@ public class GenerationManager : MonoBehaviour
     public ProcGenConfig getConfig()
     {
         return PCGConfig;
+    }
+
+    void SetWaterPlaneHeight()
+    {
+            //adjust sea level depending on depth
+            float planeY = PCGConfig.depth * PCGConfig.seaLevel;
+            Vector3 currentPosition = waterPlane.transform.position;
+            Vector3 waterLevel = new Vector3(currentPosition.x, planeY, currentPosition.z);
+            waterPlane.transform.position = waterLevel;
     }
     
     public void Perform_GenerateTextureMapping()

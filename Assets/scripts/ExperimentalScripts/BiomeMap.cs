@@ -19,27 +19,65 @@ public static class BiomeMap
                 float precipitation = precMap[i, j] / 100f;
 
                 //Color c = Color.black;
-                int c = -1;
+                int c = 3;
                 if (elevation <= seaLevel) {
                    c = 7; // c = Color.blue;
                 } else {
                     if (precipitation + (temperature * spread) < spreadThreshold)  // Allows for finer control over how widespread the tundra and polar ice caps are
                         {
                             //c = Color.white;
-                            c = 6;
-                        }   
-                    else {
-                        foreach (BiomesConfig b in biomes) {
-
-                            if (temperature > b.minTemperature && temperature <= b.maxTemperature 
-                                && precipitation > b.minPrecipitation && precipitation <= b.maxPrecipitation
-                                ) {
-                                    
-                                //c = b.color;  
-                                c = b.BiomeId;                              
-                            }
+                            c = 6; //return tundra
                         }
-                    }
+                         else if(temperature < 0.25f){
+                            //boreal and polar climate zones     
+                            if (precipitation < 0.25f) 
+                                c = 6; //return tundra
+                            if(precipitation < 0.5f) 
+                                c = 4; //return boreal forest
+                        }else if(temperature < 0.6f) 
+                        {
+                            //temperate climate zones
+                            if(precipitation < 0.25f)
+                                c = 5;  //return shrubland
+                            if(precipitation < 0.5f)
+                                c = 3;  // return temperate forest
+                        }else if(temperature > 0.6f)
+                        {
+                            //tropical areas
+                            if(precipitation < 0.25f)
+                                c = 1; //returns desert biome
+                            if(precipitation < 0.6f)
+                                c = 0; //return tropical savannah
+                            if(precipitation > 0.6f)
+                                c = 2;  //returns tropical rainforest
+                        }
+                        
+                        // foreach(BiomesConfig b in biomes)
+                        // {
+                        //     if(b.BiomeId == c)
+                        //     Debug.Log("["+ i + ","+ j + "]" + "Biome: " + b.BiomeId + "-" + b.BiomeName + "\nPrec: " + precipitation); 
+                        //     Debug.Log("["+ i + ","+ j + "]" + "\nTemp: " + temperature); 
+                        // }
+                              
+    
+                         
+                                 
+                    // else {
+                    //     foreach (BiomesConfig b in biomes) {
+
+                    //         if (temperature > b.minTemperature && temperature <= b.maxTemperature 
+                    //             && precipitation > b.minPrecipitation && precipitation <= b.maxPrecipitation
+                    //             ) {
+                                    
+                    //             //c = b.color;  
+                    //             c = b.BiomeId;
+                    //             // Debug.Log("Biome Id : " + b.BiomeId + " Biome name: " + b.BiomeName + 
+                    //             //         "\nPrecipitation: " + precipitation);     
+                    //             // Debug.Log("\nTemperature: " + temperature);                         
+                    //         }
+                    //     }
+                    // }
+
                 }
 
                 biomeMap[i, j] = c;
@@ -48,8 +86,6 @@ public static class BiomeMap
 
         return biomeMap;
     }
-
-
 
     // public static string[,] determine_biome( float elevation , float temperature , float precipitation ) {
     // if ( elevation < sealevel ) {
