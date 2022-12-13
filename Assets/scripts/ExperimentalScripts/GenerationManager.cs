@@ -100,6 +100,7 @@ public class GenerationManager : MonoBehaviour
 
     public void GenerateWorld()
     {
+        float startTime = Time.realtimeSinceStartup;
         //PCGConfig.seed = Random.Range(int.MinValue, int.MaxValue);
         // if(PCGConfig.randomOffset)
         // {
@@ -124,28 +125,15 @@ public class GenerationManager : MonoBehaviour
         
         temperatureMap = TempMap.GenerateTemperatureMap(heightMap, PCGConfig.temperatureBias, earliestIndex, latestIndex,
                                                 PCGConfig.tempHeight, PCGConfig.tempLoss,PCGConfig.baseTemp, PCGConfig.useTrueEquator);
-        
         precipitationMap = PrecipitationMap.GeneratePrecipitationMap(og_heightMap, temperatureMap, PCGConfig.dewPoint, earliestIndex, latestIndex, 
                                                             PCGConfig.precipitationIntensity, PCGConfig.useTrueEquator, PCGConfig.humidityFlatteningThreshold);
         biomeMap = BiomeMap.GenerateBiomeMap(heightMap, temperatureMap, precipitationMap, PCGConfig.seaLevel, PCGConfig.Biomes, PCGConfig.spread, PCGConfig.spreadThreshold);
 
+        Debug.Log("Climate Computations:" + ((Time.realtimeSinceStartup - startTime)*1000f) + "ms");
+
         //apply terrain heights
         TargetTerrain.terrainData = GenerateTerrain(TargetTerrain.terrainData);
 
-        //Draw Textures
-        if (drawMode == DrawMode.OriginalHeightMap)
-            DrawTexture(og_heightMap);
-        if (drawMode == DrawMode.FalloffMap)
-            DrawTexture(fallOffMap);
-        if (drawMode == DrawMode.HeightMap)
-            DrawTexture(heightMap);
-        if (drawMode == DrawMode.TemperatureMap)
-            DrawTexture(temperatureMap);
-        if (drawMode == DrawMode.PrecipitationMap)
-            DrawTexture(precipitationMap);
-        if (drawMode == DrawMode.BiomeMap)
-            DrawBiomeTexture(biomeMap);
-        
     #if UNITY_EDITOR
         if(RegenerateLayers)
             RegenerateTextures();
@@ -162,6 +150,20 @@ public class GenerationManager : MonoBehaviour
         //Spawn Objects
         assetPlacer.regenenerateObjects();
 
+        //Draw Textures
+        if (drawMode == DrawMode.OriginalHeightMap)
+            DrawTexture(og_heightMap);
+        if (drawMode == DrawMode.FalloffMap)
+            DrawTexture(fallOffMap);
+        if (drawMode == DrawMode.HeightMap)
+            DrawTexture(heightMap);
+        if (drawMode == DrawMode.TemperatureMap)
+            DrawTexture(temperatureMap);
+        if (drawMode == DrawMode.PrecipitationMap)
+            DrawTexture(precipitationMap);
+        if (drawMode == DrawMode.BiomeMap)
+            DrawBiomeTexture(biomeMap);
+
     }//END GenerateWorld()
 
 
@@ -176,11 +178,15 @@ public class GenerationManager : MonoBehaviour
 
     TerrainData GenerateTerrain (TerrainData terrainData)
     {
+        float startTime = Time.realtimeSinceStartup;
         terrainData.heightmapResolution = PCGConfig.width + 1;
         terrainData.size = new Vector3(PCGConfig.width, PCGConfig.depth, PCGConfig.height);
         
         terrainData.SetHeights(0, 0, heightMap);
+
+        Debug.Log(("Generate Terrain : " +( Time.realtimeSinceStartup - startTime)*1000f) + "ms");
         return terrainData;
+        
     }
 
     public ProcGenConfig getConfig()
@@ -199,6 +205,7 @@ public class GenerationManager : MonoBehaviour
     
     public void Perform_GenerateTextureMapping()
     {
+        float startTime = Time.realtimeSinceStartup;
         BiomeTextureToTerrainLayerIndex.Clear();
         
         Debug.Log("Building up a list of all textures");
@@ -244,6 +251,7 @@ public class GenerationManager : MonoBehaviour
             BiomeTextureToTerrainLayerIndex[textureConfig] = layerIndex;
             ++layerIndex;
         }
+        Debug.Log(("Texture Mapping : " +( Time.realtimeSinceStartup - startTime)*1000f) + "ms");
     }
     
    public int GetLayerForTexture(TextureConfig textureConfig)
@@ -252,6 +260,7 @@ public class GenerationManager : MonoBehaviour
     }
     public void Perform_TerrainPainting()
     {
+        float startTime = Time.realtimeSinceStartup;
         int alphaMapResolution = TargetTerrain.terrainData.alphamapResolution;
         int mapResolution = TargetTerrain.terrainData.heightmapResolution;
 
@@ -308,5 +317,10 @@ public class GenerationManager : MonoBehaviour
         }
 
         TargetTerrain.terrainData.SetAlphamaps(0, 0, alphaMaps);
+        Debug.Log(("Texture Painting : " + (Time.realtimeSinceStartup - startTime)*1000f) + "ms");
     }
+
+    
+
 }
+

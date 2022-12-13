@@ -18,7 +18,7 @@ public class ResourceGenerator : MonoBehaviour
     public float heightOfCheck = 10f, rangeOfCheck = 30f;
     public LayerMask layerMask;
     public Vector2 positivePosition, negativePosition;
-
+    
     // private void Start()
     // {
     //     SpawnResources();
