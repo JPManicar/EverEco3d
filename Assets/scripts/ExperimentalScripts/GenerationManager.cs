@@ -25,6 +25,7 @@ public class GenerationManager : MonoBehaviour
     public float[,] temperatureMap;
     public float[,] precipitationMap;
     public int[,] biomeMap;
+    private Color[] biomeColorMap;
     public bool autoUpdate; 
     public bool RegenerateLayers;
 
@@ -34,6 +35,7 @@ public class GenerationManager : MonoBehaviour
     public Texture2D temperatureColorImage;
     public ResourceGenerator assetPlacer;
     public GameObject waterPlane;
+    
 
     public void DrawTexture(float[,] map) {
         int width = map.GetLength(0);
@@ -73,16 +75,16 @@ public class GenerationManager : MonoBehaviour
         int height = map.GetLength(1);
 
         Texture2D texture = new Texture2D(width, height, TextureFormat.RGB24, false);
-        Color[] colorMap = new Color[width * height];
+        biomeColorMap = new Color[width * height];
 
         for (int j = 0; j < height; j++) {
             for (int i = 0; i < width; i++) {
                 foreach (var b in PCGConfig.Biomes)
                 {
                     if(map[i,j] == 7)
-                        colorMap[j * width + i] = Color.blue;
+                        biomeColorMap[j * width + i] = Color.blue;
                     else if (b.BiomeId == map[i,j])
-                        colorMap[j * width + i] = b.color;
+                        biomeColorMap[j * width + i] = b.color;
                     else
                         continue;
                 }
@@ -90,7 +92,7 @@ public class GenerationManager : MonoBehaviour
             }
         }
 
-        texture.SetPixels(colorMap);
+        texture.SetPixels(biomeColorMap);
         texture.Apply();
         //texture.filterMode = FilterMode.Point;
 
@@ -100,6 +102,7 @@ public class GenerationManager : MonoBehaviour
 
     public void GenerateWorld()
     {
+        
         float startTime = Time.realtimeSinceStartup;
         //PCGConfig.seed = Random.Range(int.MinValue, int.MaxValue);
         // if(PCGConfig.randomOffset)
@@ -166,8 +169,6 @@ public class GenerationManager : MonoBehaviour
 
     }//END GenerateWorld()
 
-
-
     #if UNITY_EDITOR
     public void RegenerateTextures()
     {
@@ -193,13 +194,20 @@ public class GenerationManager : MonoBehaviour
     {
         return PCGConfig;
     }
+    public Color[] getBiomeColorMap()
+    {
+        return biomeColorMap;
+    }
 
     void SetWaterPlaneHeight()
     {
-            //adjust sea level depending on depth
+            //get values from PCG Config
             float planeY = PCGConfig.depth * PCGConfig.seaLevel;
             Vector3 currentPosition = waterPlane.transform.position;
-            Vector3 waterLevel = new Vector3(currentPosition.x, planeY, currentPosition.z);
+            Vector3 waterLevel = new Vector3(PCGConfig.width/2 , planeY, PCGConfig.height/2);
+
+            //adjust water plane scale and position
+            waterPlane.transform.localScale = new Vector3(PCGConfig.width, PCGConfig.height, PCGConfig. height);
             waterPlane.transform.position = waterLevel;
     }
     
