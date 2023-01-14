@@ -8,6 +8,7 @@ public static class NoiseGeneration {
 
 	public static float[,] GenerateNoiseMap(int mapWidth, int mapHeight, int seed, float scale, int octaves, float persistance, float lacunarity, Vector2 offset)
 	{
+		float startTime = Time.realtimeSinceStartup;
 		float[,] noiseMap = new float[mapWidth,mapHeight];
 		System.Random prng = new System.Random (seed);
 		Vector2[] octaveOffsets = new Vector2[octaves];
@@ -64,7 +65,7 @@ public static class NoiseGeneration {
 				noiseMap [x, y] = Mathf.InverseLerp (minNoiseHeight, maxNoiseHeight, noiseMap [x, y]);
 			}
 		}
-
+		Debug.Log("Noise Gen:" + ((Time.realtimeSinceStartup - startTime)*1000f) + "ms");
 		return noiseMap;
 	}
 

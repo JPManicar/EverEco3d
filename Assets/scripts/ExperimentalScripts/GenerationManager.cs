@@ -35,8 +35,27 @@ public class GenerationManager : MonoBehaviour
     public Texture2D temperatureColorImage;
     public ResourceGenerator assetPlacer;
     public GameObject waterPlane;
+    public DisplayGrid displayGrid;
     
+    void Start()
+    {
+        GenerateWorld();
+    }
+    void Update()
+    {
+        Vector3 point = displayGrid.getPointClicked();
+        Vector2 loc = worldPosToGridPos(point);
 
+        //WILL create separate method to display all the info
+        int biomeId = getBiomeIdAt((int)loc.x, (int)loc.y);
+        string biomeName = BiomeMap.getBiomeName(biomeId, PCGConfig.Biomes);
+        float temperature = getTemp((int)loc.x, (int)loc.y);
+        float precipitation = getPrec((int)loc.x, (int)loc.y);
+        Debug.Log("Biome at " + point + "is " + biomeId + " " + biomeName );
+        Debug.Log("Temperature: " + temperature + "\n Precipitation: " + precipitation + "||" + biomeName );
+        
+     
+    }
     public void DrawTexture(float[,] map) {
         int width = map.GetLength(0);
         int height = map.GetLength(1);
@@ -66,7 +85,7 @@ public class GenerationManager : MonoBehaviour
         texture.Apply();
         //texture.filterMode = FilterMode.Point;
 
-        textureRenderer.material.mainTexture = texture;
+        textureRenderer.sharedMaterial.mainTexture = texture;
         //textureRenderer.transform.localScale = new Vector3(width, 0, height);  //this line changes the plane's size to the size of the grid  maps
     }
 
@@ -167,6 +186,8 @@ public class GenerationManager : MonoBehaviour
         if (drawMode == DrawMode.BiomeMap)
             DrawBiomeTexture(biomeMap);
 
+       
+
     }//END GenerateWorld()
 
     #if UNITY_EDITOR
@@ -198,6 +219,45 @@ public class GenerationManager : MonoBehaviour
     {
         return biomeColorMap;
     }
+    public int[,] getBiomeMap()
+    {
+        return biomeMap;
+    }
+    public int getBiomeIdAt(int x, int y)
+    {
+        return biomeMap[x,y];
+    }
+    public float[,] getTempMap()
+    {
+        return temperatureMap;
+    }
+    public float getTemp(int x, int y)
+    {
+        return temperatureMap[x,y];
+    }
+    public float[,] getPrecMap()
+    {
+        return precipitationMap;
+    }
+    public float getPrec(int x, int y)
+    {
+        return precipitationMap[x,y];
+    }
+     public Vector2 worldPosToGridPos(Vector3 pointWorldPos)
+    {
+        //Get the Index in the array
+        Vector3 terrainLocalPos = TargetTerrain.transform.InverseTransformPoint(pointWorldPos);
+        Vector2 normalizedPos = new Vector2(terrainLocalPos.x / TargetTerrain.terrainData.size.x, terrainLocalPos.z / TargetTerrain.terrainData.size.z);
+
+        //inverts the grid to match that of the terrain
+        int x = Mathf.RoundToInt((1 - normalizedPos.y) * PCGConfig.width);
+        int y = Mathf.RoundToInt((1 - normalizedPos.x) * PCGConfig.height);
+        Debug.Log("Grid Pos: "+ x + ", " + y);
+        //getIndexInBiomeMap(x,y); 
+        Vector2 pos = new Vector2(x,y);
+        return pos;
+    }
+    
 
     void SetWaterPlaneHeight()
     {
@@ -328,7 +388,20 @@ public class GenerationManager : MonoBehaviour
         Debug.Log(("Texture Painting : " + (Time.realtimeSinceStartup - startTime)*1000f) + "ms");
     }
 
-    
+    // void OnMouseDown()
+    // {
+    // Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+    // RaycastHit hit;
+    // if (Physics.Raycast(ray, out hit))
+    // {
+    //     Vector3 pointWorldPos = hit.point;
+    //     //selectedPoint = hit.point;
+        
+    //     //getPointClicked(pointWorldPos);
+    //      Debug.Log("Coordinates: " + pointWorldPos);
+    //     findCoord(pointWorldPos);
+    // }
+    // }
 
 }
 

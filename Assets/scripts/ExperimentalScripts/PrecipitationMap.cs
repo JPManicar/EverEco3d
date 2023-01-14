@@ -10,7 +10,7 @@ public static class PrecipitationMap
         int height = tempMap.GetLength(1);
         float[,] precMap = new float[width, height];
         float[,] humidityInversionMap = new float[width, height];
-
+        float startTime = Time.realtimeSinceStartup;
         // If the humidity is inverted (line 93), deserts and other high temperature/low precipitation biomes wont spawn.
         // If it is inverted, then medium temperature/mid to high precipitation biomes wont spawn
         // This generates a map based on the original height map to determine when to invert the humidity or not, allowing for deserts and such to spawn. 
@@ -48,6 +48,7 @@ public static class PrecipitationMap
             }
         }
 
+        Debug.Log("Precipitation Runtime:" + ((Time.realtimeSinceStartup - startTime)*1000f) + "ms");
         return precMap;
     }
 

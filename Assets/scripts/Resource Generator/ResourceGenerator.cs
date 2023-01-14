@@ -26,8 +26,10 @@ public class ResourceGenerator : MonoBehaviour
 
     public void regenenerateObjects()
     {
+            float startTime = Time.realtimeSinceStartup;
             DeleteResources();
             SpawnResources();
+            Debug.Log("Asset Placement:" + ((Time.realtimeSinceStartup - startTime)*1000f) + "ms");
     }
 
 

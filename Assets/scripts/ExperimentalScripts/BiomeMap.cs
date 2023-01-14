@@ -19,7 +19,7 @@ public static class BiomeMap
                 float precipitation = precMap[i, j] / 100f;
 
                 //Color c = Color.black;
-                int c = -1;
+                int c = 3;
                 if (elevation <= seaLevel) {
                    c = 7; // c = Color.blue;
                 } else {
@@ -85,6 +85,21 @@ public static class BiomeMap
         }
 
         return biomeMap;
+    }
+
+    public static string getBiomeName(int biomeId, List<BiomesConfig> biomes)
+    {
+        string biomeAssigned = "Water";
+         foreach (BiomesConfig b in biomes) {
+
+            if (b.BiomeId == biomeId)
+            {
+               biomeAssigned = b.BiomeName;                              
+            }
+           
+        }
+
+        return biomeAssigned;
     }
 
     // public static string[,] determine_biome( float elevation , float temperature , float precipitation ) {
